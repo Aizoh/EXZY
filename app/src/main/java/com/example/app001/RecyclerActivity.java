@@ -21,7 +21,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 //
+import com.example.app001.Model.PanicEvent;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -31,8 +38,9 @@ public class RecyclerActivity extends AppCompatActivity  implements View.OnClick
 
     //handler for recycler view
     private RecyclerView recyclerView;
-    //ARRAY HOLDER FOR IMAGES
-    private  int[] images = {R.drawable.pic1,R.drawable.pic2,R.drawable.pic3,R.drawable.pic4};
+    //list HOLDER FOR IMAGES
+    List<PanicEvent> listEvents = new ArrayList<>();
+
     //recycler adapter
     private RecyclerAdapter recyclerAdapter;
 
@@ -52,10 +60,12 @@ public class RecyclerActivity extends AppCompatActivity  implements View.OnClick
             GPSService.GPSBinder binder = (GPSService.GPSBinder) service;
             mService = binder.getService();
             mBound = true;
+            Log.e(className.toShortString(),connection.toString());
         }
 
         @Override
         public void onServiceDisconnected(ComponentName arg0) {
+
             mBound = false;
         }
     };
@@ -64,18 +74,18 @@ public class RecyclerActivity extends AppCompatActivity  implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler);
+        PopulateEvents();
         recyclerView = findViewById(R.id.recyclerView);
         layoutManager = new GridLayoutManager(this,2);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerAdapter = new RecyclerAdapter(images);
+        recyclerAdapter = new RecyclerAdapter(listEvents);
         recyclerView.setAdapter(recyclerAdapter);
         //LOCATION ADDS
         LocButton = findViewById(R.id.btnloc);
         LocButton.setOnClickListener(this);
 
-        Intent intent = new Intent(this, GPSService.class);
-        bindService(intent, connection, Context.BIND_AUTO_CREATE);
+
         //Request Permissions
         if (ActivityCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             //Ask for permission ANdroid L >
@@ -89,6 +99,18 @@ public class RecyclerActivity extends AppCompatActivity  implements View.OnClick
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
     }
+  //We have received a panic Handle it appropriately
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(PanicEvent event) {
+        if (mBound) {
+        Location loc = mService.getLocation();
+        Toast.makeText(this,event.getCaption()+" was Reported at "+getLocationAddress(loc.getLatitude(), loc.getLongitude()),Toast.LENGTH_LONG).show();
+    }else {
+            Toast.makeText(this,event.getCaption()+" Help is coming",Toast.LENGTH_LONG).show();
+        }
+    }
+
+
 
     @Override
     public void onClick(View v) {
@@ -177,6 +199,7 @@ public class RecyclerActivity extends AppCompatActivity  implements View.OnClick
         super.onResume();
         Intent intent = new Intent(this, GPSService.class);
         bindService(intent, connection, Context.BIND_AUTO_CREATE);
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -184,5 +207,17 @@ public class RecyclerActivity extends AppCompatActivity  implements View.OnClick
         super.onStop();
         unbindService(connection);
         mBound = false;
+        EventBus.getDefault().unregister(this);
+    }
+
+    /**
+     * The data to display in Recylerview Items
+     */
+    void PopulateEvents(){
+        int[] images = {R.drawable.pic1,R.drawable.pic2,R.drawable.pic3,R.drawable.pic4};
+        listEvents.add(new PanicEvent(images[0],"Fire"));
+        listEvents.add(new PanicEvent(images[1],"Floods"));
+        listEvents.add(new PanicEvent(images[2],"Robbery"));
+        listEvents.add(new PanicEvent(images[3],"Terrorism"));
     }
 }
