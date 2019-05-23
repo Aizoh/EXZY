@@ -3,7 +3,7 @@
     <string name="signIn">Sign In</string>
     <string name="signUp">Sign Up</string>
     <string name="password">password</string>
-    <string name="emailhint">123@gmail.com</string>
+    <string name="emailhint">Email</string>
     <string name="register">Register</string>
     <string name="hometext">Welcome Home</string>
     <string name="loginText">Already a member ? Log in</string>
