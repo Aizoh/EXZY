@@ -13,11 +13,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.app001.Model.PanicEvent;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -31,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        isUserLoggedIn();
         Button SignUp = findViewById(R.id.btnup);
         Button SignIn = findViewById(R.id.btnIn);
         Etmail = findViewById(R.id.eTmail);
@@ -79,6 +85,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if (firebaseAuth.getCurrentUser().isEmailVerified()){
 
                         startActivity(new Intent(MainActivity.this, RecyclerActivity.class));
+                        //We are never coming back here after signing in
+                        finish();
 
                     }else {
                         Toast.makeText(MainActivity.this,"PLEASE VERIFY YOUR EMAIL",
@@ -126,6 +134,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
 
+    }
+   private void isUserLoggedIn(){
+        //User is logged in skip logging in
+        if(firebaseAuth.getCurrentUser()!=null){
+            startActivity(new Intent(MainActivity.this, RecyclerActivity.class));
+            //No looking back
+            finish();
+        }
     }
 
 }
