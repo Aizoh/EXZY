@@ -10,6 +10,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //FIELDS//
 
     EditText Etmail,Etpass;
+
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
     @Override
@@ -33,9 +35,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button SignIn = findViewById(R.id.btnIn);
         Etmail = findViewById(R.id.eTmail);
         Etpass = findViewById(R.id.eTpass);
+        TextView Tvforgotpass = findViewById(R.id.forgot_pass);
 
         SignIn.setOnClickListener(this);
         SignUp.setOnClickListener(this);
+        Tvforgotpass.setOnClickListener(this);
     }
     // a method for validation
     public void validateUser(){
@@ -116,6 +120,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnup:
                 startActivity(new Intent(this, SignUpActivity.class));
 
+                break;
+            case R.id.forgot_pass:
+                startActivity(new Intent(MainActivity.this,ForgotPassActivity.class));
                 break;
         }
 

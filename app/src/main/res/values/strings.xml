@@ -8,4 +8,6 @@
     <string name="hometext">Welcome Home</string>
     <string name="loginText">Already a member ? Log in</string>
     <string name="location">Get location</string>
+    <string name="forgotpass">Forgot password?</string>
+    <string name="reset_pass">Reset Password</string>
 </resources>

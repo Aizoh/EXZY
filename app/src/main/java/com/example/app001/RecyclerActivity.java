@@ -93,7 +93,7 @@ public class RecyclerActivity extends AppCompatActivity  implements View.OnClick
     @Override
     public void onClick(View v) {
 
-        switch (v.getId()){
+       switch (v.getId()){
             case R.id.btnloc:
                 if (mBound) {
                     Location loc = mService.getLocation();

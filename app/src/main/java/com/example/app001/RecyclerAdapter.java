@@ -4,11 +4,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ImageViewHolder> {
-
+    //
+    Button BtnLoc ;
     // a constructor which will accept an array of images
     private int[] images;
 
@@ -21,7 +23,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ImageV
     public ImageViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
         //responsible for creating every object view
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_terror,parent,false);
-
         // from the constructor of the Image view holder static class
         ImageViewHolder imageViewHolder = new ImageViewHolder(view);
 
