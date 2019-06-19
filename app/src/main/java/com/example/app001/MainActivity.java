@@ -10,6 +10,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //FIELDS//
 
     EditText Etmail,Etpass;
+    ProgressBar progressBar;
 
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
@@ -42,12 +44,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Etmail = findViewById(R.id.eTmail);
         Etpass = findViewById(R.id.eTpass);
         TextView Tvforgotpass = findViewById(R.id.forgot_pass);
-
+        Tvforgotpass.setVisibility(View.VISIBLE);
+        progressBar = findViewById(R.id.progress_circular);
+        progressBar.setVisibility(View.INVISIBLE);
         SignIn.setOnClickListener(this);
         SignUp.setOnClickListener(this);
         Tvforgotpass.setOnClickListener(this);
     }
-    // a method for validation
+    // a method for user input validation
     public void validateUser(){
         String email,password;
         email = Etmail.getText().toString().trim();
@@ -74,11 +78,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
 
+
+        progressBar.setVisibility(View.VISIBLE);
         firebaseAuth.signInWithEmailAndPassword(email,password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-
+                progressBar.setVisibility(View.GONE);
                 if(task.isSuccessful()){
                     //check if user's email is verified
 
@@ -112,7 +118,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()){
 
             case R.id.btnIn:
-                //Toast.makeText(this, "WELCOME HOME",Toast.LENGTH_SHORT).show();
                 //startActivity(new Intent(this, SignedInActivity.class));
                 //startActivity(new Intent(this, RecyclerActivity.class));
                /* if (firebaseAuth.getCurrentUser()!=null && firebaseAuth.getCurrentUser().isEmailVerified()){
@@ -130,8 +135,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
             case R.id.forgot_pass:
-                startActivity(new Intent(MainActivity.this,ForgotPassActivity.class));
+
+                startActivity(new Intent(getApplicationContext(),ForgotPassActivity.class));
                 break;
+
         }
 
     }

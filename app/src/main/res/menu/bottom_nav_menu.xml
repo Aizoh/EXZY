@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_profile"
+        android:enabled="true"
+        android:title="Profile"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_action_profile"/>
+    <item
+        android:id="@+id/action_exit"
+        android:enabled="true"
+        android:title="Exit"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_action_exit"/>
+    <item
+        android:id="@+id/action_guide"
+        android:enabled="true"
+        android:title="Guide"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_action_guide"/>
+</menu>

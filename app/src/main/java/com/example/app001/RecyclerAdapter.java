@@ -66,6 +66,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ImageV
     //all items in recycler view are objects of view holder a class to create this objects
     public static class ImageViewHolder extends RecyclerView.ViewHolder{
 
+
         // each object in the view has an image and a text ,create the two holders
         ImageView Terror;
         TextView Terror_nm;

@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ForgotPassActivity"></activity>
+        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".GuideActivity" />
+        <activity android:name=".ForgotPassActivity" />
         <activity android:name=".RecyclerActivity" />
         <activity android:name=".SignedInActivity" />
         <activity android:name=".SignUpActivity" />
@@ -24,6 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service android:name=".GPSService" />
     </application>
 

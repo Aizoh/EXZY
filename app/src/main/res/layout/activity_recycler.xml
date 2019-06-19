@@ -17,11 +17,21 @@
 
     </android.support.v7.widget.RecyclerView>
 
-    <Button
+    <!--<Button
         android:id="@+id/btnloc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
         android:onClick="onClick"
-        android:text="@string/location" />
+        android:text="@string/location" />!-->
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/bottom_nav_menu"
+        app:itemBackground="@android:color/holo_blue_light"
+        app:itemIconTint="@android:color/white"
+        app:itemTextColor="@android:color/white"
+        android:layout_gravity="center"/>
 </LinearLayout>

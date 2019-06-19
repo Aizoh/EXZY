@@ -10,4 +10,6 @@
     <string name="location">Get location</string>
     <string name="forgotpass">Forgot password?</string>
     <string name="reset_pass">Reset Password</string>
+    <string name="guide">The guide section</string>
+    <string name="twitterUsername">twitter</string>
 </resources>
