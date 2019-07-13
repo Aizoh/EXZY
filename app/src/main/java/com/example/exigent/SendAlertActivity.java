@@ -73,13 +73,13 @@ public class SendAlertActivity extends AppCompatActivity  implements View.OnClic
         }
     }
     public void sendMessage(){
+        pgBarEmergency.setVisibility(View.VISIBLE);
         String message = etMsg.getText().toString().trim();
         String phone = "0792640208";
         if(message.isEmpty()){
             etMsg.setError("Enter text to send");
             etMsg.requestFocus();
         }
-        pgBarEmergency.setVisibility(View.VISIBLE);
         // class for sending the text message
         SmsManager smsManager = SmsManager.getDefault();
         //for long text messages split
@@ -90,7 +90,7 @@ public class SendAlertActivity extends AppCompatActivity  implements View.OnClic
             PendingIntent deliveredIntent = PendingIntent.getBroadcast(this,0,new Intent("SMS_DELIVERED"),0);
             smsManager.sendTextMessage(phone,null,msg,sendIntent,deliveredIntent);
         }
-        pgBarEmergency.setVisibility(View.GONE);
+
         // Progress dialogue
        /* final ProgressDialog msgDialogue = new ProgressDialog(getApplicationContext());
         msgDialogue.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -156,7 +156,8 @@ public class SendAlertActivity extends AppCompatActivity  implements View.OnClic
                         s = "Message sent Successfully !";
                         break;
                     case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
-                        s = "Generic failure Error";
+                        //s = "Generic failure Error";
+                        s = "Failed ...Top up your Account try Again Later";
                         break;
                     case SmsManager.RESULT_ERROR_NO_SERVICE:
                         s = "Error : Service Unavailable";
@@ -165,11 +166,16 @@ public class SendAlertActivity extends AppCompatActivity  implements View.OnClic
                         s = "Error: Null PDU";
                         break;
                     case SmsManager.RESULT_ERROR_RADIO_OFF:
-                        s = "Error : Radio Off/ Network off";
+                        s = "Error : Radio Off/ Network Unavailable";
                         break;
                     default:
+                        s = "Failed sending message .Try Again Later....";
                         break;
                 }
+                etMsg.setText("");
+                pgBarEmergency.setVisibility(View.GONE);
+                Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
             }
         };
         deliveredStatusReceiver  = new BroadcastReceiver() {
@@ -178,15 +184,18 @@ public class SendAlertActivity extends AppCompatActivity  implements View.OnClic
                 String s = "Message not Delivered";
                 switch (getResultCode()){
                     case Activity.RESULT_OK:
-                        s = "Message Received Help is on the way";
+                        s = "Message Received Help is on the way...";
                         break;
                     case Activity.RESULT_CANCELED:
+                        s = "Failed to Deliver the message try Again Later...";
                         break;
 
                 }
-                etMsg.setText("");
+               // etMsg.setText("");
+               // pgBarEmergency.setVisibility(View.GONE);
+
                 Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                //startActivity(new Intent(getApplicationContext(),MainActivity.class));
             }
         };
         registerReceiver(sentStatusReceiver,new IntentFilter("SMS_SENT"));

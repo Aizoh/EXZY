@@ -41,6 +41,8 @@ import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import com.firebase.ui.auth.AuthUI;
@@ -168,9 +170,13 @@ public class RecyclerActivity extends AppCompatActivity  implements View.OnClick
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(PanicEvent event) {
         if (mBound) {
+            Date currentTime = Calendar.getInstance().getTime();
         Location loc = mService.getLocation();
-        String area = getLocationAddress(loc.getLatitude(), loc.getLongitude()).toString();
-        String emergency = event.getCaption()+" was Reported at "+ area;
+        String area = getLocationAddress(loc.getLatitude(), loc.getLongitude());
+
+        String emergency = event.getCaption()+" was Reported at "+ area +" Coordinates"
+                + loc.getLatitude()+","+loc.getLongitude() +"at "+ currentTime ;
+
             Intent i = new Intent(getApplicationContext(), SendAlertActivity.class);
             i.putExtra(MESSAGE,emergency);
             startActivity(i);
@@ -277,11 +283,13 @@ public class RecyclerActivity extends AppCompatActivity  implements View.OnClick
      * The data to display in Recylerview Items
      */
     void PopulateEvents(){
-        int[] images = {R.drawable.pic1,R.drawable.pic2,R.drawable.pic3,R.drawable.pic4};
+        int[] images = {R.drawable.pic1,R.drawable.pic2,R.drawable.pic3,R.drawable.pic4,R.drawable.pic5,R.drawable.pic6};
         listEvents.add(new PanicEvent(images[0],"Fire"));
         listEvents.add(new PanicEvent(images[1],"Floods"));
         listEvents.add(new PanicEvent(images[2],"Robbery"));
         listEvents.add(new PanicEvent(images[3],"Terrorism"));
+        listEvents.add(new PanicEvent(images[4],"Kidnapping"));
+        listEvents.add(new PanicEvent(images[5],"Demos"));
     }
     public  void signOut(){
         AuthUI.getInstance()
