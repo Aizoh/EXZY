@@ -1,10 +1,7 @@
-package com.example.app001;
+package com.example.exigent;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class SignedInActivity extends AppCompatActivity {
     // Write a message to the database

@@ -1,7 +1,7 @@
-package com.example.app001;
+package com.example.exigent;
 
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.app001.Model.PanicEvent;
+import com.example.exigent.Model.PanicEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -30,9 +30,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ImageV
         //responsible for creating every object view
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_terror,parent,false);
         // from the constructor of the Image view holder static class
-        ImageViewHolder imageViewHolder = new ImageViewHolder(view);
 
-        return imageViewHolder;
+        return new ImageViewHolder(view);
     }
 
     @Override
@@ -78,5 +77,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ImageV
             cardView = itemView.findViewById(R.id.cardevent);
         }
     }
+
+
 
 }

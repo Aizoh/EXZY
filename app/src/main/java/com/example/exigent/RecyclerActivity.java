@@ -1,4 +1,4 @@
-package com.example.app001;
+package com.example.exigent;
 
 import android.Manifest;
 import android.content.ComponentName;
@@ -10,22 +10,26 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.IBinder;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.internal.BottomNavigationMenu;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 //
-import com.example.app001.Model.PanicEvent;
+import com.example.exigent.Model.PanicEvent;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,12 +37,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import com.firebase.ui.auth.AuthUI;
+import com.google.firebase.auth.FirebaseUser;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
@@ -59,6 +65,7 @@ public class RecyclerActivity extends AppCompatActivity  implements View.OnClick
 
     boolean mBound = false;
     GPSService mService;
+    public static final String MESSAGE = "com.example.SIMPLE_MESSAGE";
     private ServiceConnection connection = new ServiceConnection() {
 
         @Override
@@ -81,6 +88,37 @@ public class RecyclerActivity extends AppCompatActivity  implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler);
+        Toolbar toolbar = findViewById(R.id.toolBarUser);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        TextView tvCurrentUser = findViewById(R.id.tvCurrentUser);
+        // blinking  textview
+        TextView tvReportPg = findViewById(R.id.tvReportpg);
+        Animation anim = new AlphaAnimation(0.0f, 1.0f);
+        anim.setDuration(50); //You can manage the time of the blink with this parameter
+        anim.setStartOffset(20);
+        anim.setRepeatMode(Animation.REVERSE);
+        anim.setRepeatCount(Animation.INFINITE);
+        tvReportPg.startAnimation(anim);
+       // Button btnCurrentUser = findViewById(R.id.btnCurrentUser);
+        //Button btnReportPage = findViewById(R.id.btnEmergencyHome);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // Name, email address, and profile photo Url
+            //String sname = user.getDisplayName();
+            String semail = user.getEmail();
+            //Uri photoUrl = user.getPhotoUrl()
+            //toolbar.setTitle(semail);
+            // The user's ID, unique to the Firebase project. Do NOT use this value to
+            // authenticate with your backend server, if you have one. Use
+            // FirebaseUser.getToken() instead.
+            String uid = user.getUid();
+           // btnCurrentUser.setText(semail);
+            tvCurrentUser.setText(semail);
+           // btnCurrentUser.setFocusable(false);
+
+        }
         PopulateEvents();
         recyclerView = findViewById(R.id.recyclerView);
         layoutManager = new GridLayoutManager(this,2);
@@ -131,7 +169,13 @@ public class RecyclerActivity extends AppCompatActivity  implements View.OnClick
     public void onMessageEvent(PanicEvent event) {
         if (mBound) {
         Location loc = mService.getLocation();
-        Toast.makeText(this,event.getCaption()+" was Reported at "+getLocationAddress(loc.getLatitude(), loc.getLongitude()),Toast.LENGTH_LONG).show();
+        String area = getLocationAddress(loc.getLatitude(), loc.getLongitude()).toString();
+        String emergency = event.getCaption()+" was Reported at "+ area;
+            Intent i = new Intent(getApplicationContext(), SendAlertActivity.class);
+            i.putExtra(MESSAGE,emergency);
+            startActivity(i);
+
+            //Toast.makeText(this,event.getCaption()+" was Reported at "+ area,Toast.LENGTH_LONG).show();
     }else {
             Toast.makeText(this,event.getCaption()+" Help is coming",Toast.LENGTH_LONG).show();
         }
@@ -208,6 +252,7 @@ public class RecyclerActivity extends AppCompatActivity  implements View.OnClick
     //OVERRIDES
     @Override
     protected void onStart() {
+
         super.onStart();
 
     }

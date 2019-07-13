@@ -1,52 +1,45 @@
 {
   "project_info": {
-    "project_number": "333896145700",
-    "firebase_url": "https://app001-3ba3c.firebaseio.com",
-    "project_id": "app001-3ba3c",
-    "storage_bucket": "app001-3ba3c.appspot.com"
+    "project_number": "798191491723",
+    "firebase_url": "https://exigency-2019.firebaseio.com",
+    "project_id": "exigency-2019",
+    "storage_bucket": "exigency-2019.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:333896145700:android:b1e1d56914762f16",
+        "mobilesdk_app_id": "1:798191491723:android:2b8f2ed7175031b1",
         "android_client_info": {
-          "package_name": "com.example.app001"
+          "package_name": "com.example.exigent"
         }
       },
       "oauth_client": [
         {
-          "client_id": "333896145700-jkee1j3hf0umkmap102h9i6kv1ho8uv0.apps.googleusercontent.com",
+          "client_id": "798191491723-gne8u06ma6f0udiaej9rjip9gjqf5345.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.app001",
+            "package_name": "com.example.exigent",
             "certificate_hash": "c2bdb210cd776da1a97a0c76cd7b203da7701a32"
           }
         },
         {
-          "client_id": "333896145700-eeb40pq1bvpic26qmsufp3n32j634691.apps.googleusercontent.com",
+          "client_id": "798191491723-cumvp9a5on9qqb6ubm6auj85nk3b6tvl.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD11MHIsTaEH-F8iSNWfD0MoS-4l5pm_p4"
+          "current_key": "AIzaSyAaeOv_2YpjA2NrscLZh5VrUET2Jz6V6wI"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "333896145700-eeb40pq1bvpic26qmsufp3n32j634691.apps.googleusercontent.com",
+              "client_id": "798191491723-cumvp9a5on9qqb6ubm6auj85nk3b6tvl.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }

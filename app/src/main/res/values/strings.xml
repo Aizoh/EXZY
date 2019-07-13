@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">E-panic</string>
+    <string name="app_name">Exigency</string>
     <string name="signIn">Sign In</string>
     <string name="signUp">Sign Up</string>
     <string name="password">password</string>
-    <string name="emailhint">Email</string>
+    <string name="emailhint">example@gmail.com</string>
     <string name="register">Register</string>
     <string name="hometext">Welcome Home</string>
     <string name="loginText">Already a member ? Log in</string>
@@ -12,4 +12,18 @@
     <string name="reset_pass">Reset Password</string>
     <string name="guide">The guide section</string>
     <string name="twitterUsername">twitter</string>
+    <string name="search_hint">type emergency here to get guides...</string>
+    <string name="phone">0718582904</string>
+    <string name="relationship">relationship</string>
+    <string name="name">Jacob</string>
+    <string name="region">Juja</string>
+    <string name="profile">Profile</string>
+    <string name="phoneNo">Phone</string>
+    <string name="Name">Name</string>
+    <string name="Email">Email</string>
+    <string name="Region">Region</string>
+    <string name="editProfile">Edit</string>
+    <string name="updateProfile">Update Profile</string>
+    <string name="reportPage">Report An Emergency !</string>
+    <string name="cancel">Cancel</string>
 </resources>

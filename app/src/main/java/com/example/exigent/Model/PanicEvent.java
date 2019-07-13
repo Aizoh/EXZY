@@ -1,4 +1,4 @@
-package com.example.app001.Model;
+package com.example.exigent.Model;
 
 /**
  * This class is used to hold a panic event for the recylerview

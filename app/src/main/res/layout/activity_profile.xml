@@ -1,300 +1,269 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProfileActivity">
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-
-        <RelativeLayout
-            android:id="@+id/rellay1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/grad"
-            android:paddingBottom="20dp">
-
-            <RelativeLayout
-                android:id="@+id/imgUser"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/circle_border">
-
-                <ImageView
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:layout_margin="9dp"
-                    android:adjustViewBounds="true"
-                    android:background="@drawable/circle"
-                    android:padding="3dp"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/ic_user" />
-
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/tv_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/imgUser"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="15sp"
-                android:fontFamily="sans-serif-light"
-                android:text="Joey Tribbiani"
-                android:textColor="@color/white"
-                android:textSize="32sp" />
-
-
-            <TextView
-                android:id="@+id/tv_address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_name"
-                android:layout_centerHorizontal="true"
-                android:fontFamily="sans-serif"
-                android:text="new york, usa"
-                android:textAllCaps="true"
-                android:textColor="@color/address"
-                android:textSize="14sp" />
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="15dp"
-                android:adjustViewBounds="true"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_settings" />
-
-        </RelativeLayout>
-
-        <LinearLayout
-            android:id="@+id/linlay1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/rellay1"
-            android:orientation="horizontal">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="@color/followersBg"
-                android:gravity="center"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-light"
-                        android:text="453K"
-                        android:textColor="@color/white"
-                        android:textSize="25sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-light"
-                        android:text="followers"
-                        android:textAllCaps="true"
-                        android:textColor="@color/white"
-                        android:textSize="13sp" />
-
-                </LinearLayout>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:background="@color/followingBg"
-                android:gravity="center"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-light"
-                        android:text="873"
-                        android:textColor="@color/white"
-                        android:textSize="25sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-light"
-                        android:text="following"
-                        android:textAllCaps="true"
-                        android:textColor="@color/white"
-                        android:textSize="13sp" />
-
-                </LinearLayout>
-
-            </RelativeLayout>
-
-        </LinearLayout>
-
+        android:layout_height="match_parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/linlay1">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/relativelayout1.2">
 
-            <LinearLayout
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/profile"
+                android:textSize="30dp"
+                android:id="@+id/txt123"
+
+                android:layout_alignParentTop="true"
+                android:textStyle="bold" />
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical">
+                android:id="@+id/cardviewProfile"
+                android:layout_below="@+id/txt123"
+                android:layout_margin="5dp"
+                android:padding="10dp"
+                android:background="@drawable/grad"
+                app:cardCornerRadius="10dp">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:padding="10dp">
 
-                    <TextView
+                    <RelativeLayout
+                        android:id="@+id/relativeLayoutImage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Email"
-                        android:textColor="@color/headings"
-                        android:textSize="13sp" />
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/circle_border"
+
+                        >
+
+                        <ImageView
+                            android:id="@+id/etImageViewProfile"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginStart="9dp"
+
+                            android:layout_marginTop="9dp"
+                            android:layout_marginEnd="9dp"
+                            android:layout_marginBottom="9dp"
+                            android:adjustViewBounds="true"
+                            android:background="@drawable/circle"
+                            android:padding="4dp"
+                            android:src="@drawable/hat" />
+
+                    </RelativeLayout>
 
                     <TextView
+                        android:id="@+id/etName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-light"
-                        android:text="joey@sharenofood.com"
-                        android:textColor="#000000"
-                        android:textSize="18sp" />
+                        android:layout_below="@id/relativeLayoutImage"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="5dp"
+                        android:text="@string/name"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                        android:textColor="#000000" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="15dp"
-                        android:background="@color/grey" />
+                    <TextView
+                        android:id="@+id/etEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/etName"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/emailhint"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 
-                </LinearLayout>
+                    <TextView
+                        android:id="@+id/etPhone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/etEmail"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/colorPrimary"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:text="@string/phone"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+                        android:textStyle="bold" />
 
-                <LinearLayout
+                    <TextView
+                        android:id="@+id/etRegion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/etPhone"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="@string/region"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                        android:textColor="#F44336"
+                        android:textSize="15dp" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:padding="10dp"
+                android:id="@+id/cardviewEmergencyContact"
+                android:layout_below="@+id/cardviewProfile"
+                app:cardCornerRadius="10dp">
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:orientation="vertical">
+                    android:padding="10dp"
+                    android:id="@+id/relativeLY1"
+                    android:layout_below="@+id/relativeLY1"
+                    >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Phone"
-                        android:textColor="@color/headings"
-                        android:textSize="13sp" />
+                        android:id="@+id/etEmergeCont1Name"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="10sp"
+                        android:text="@string/name"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-light"
-                        android:text="+1-202-555-0157"
-                        android:textColor="#000000"
-                        android:textSize="18sp" />
+                        android:layout_below="@+id/etEmergeCont1Name"
+                        android:id="@+id/etEmergeCont1Phone"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="10sp"
+                        android:text="@string/phone"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="15dp"
-                        android:background="@color/grey" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/etEmergeCont1Phone"
+                        android:id="@+id/etEmergeCont1relationship"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="10sp"
+                        android:text="@string/relationship"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
-                </LinearLayout>
 
-                <LinearLayout
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/cardviewEmergencyContact2"
+                android:layout_below="@+id/cardviewEmergencyContact"
+                app:cardCornerRadius="10dp">
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:orientation="vertical">
+                    android:padding="10dp"
+                    android:id="@+id/relativeLY2">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Twitter"
-                        android:textColor="@color/headings"
-                        android:textSize="13sp" />
+                        android:id="@+id/etEmergeCont2Name"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="10sp"
+                        android:text="@string/name"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-light"
-                        android:text="@string/twitterUsername"
-                        android:textColor="#000000"
-                        android:textSize="18sp" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="15dp"
-                        android:background="@color/grey" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:orientation="vertical">
+                        android:layout_below="@+id/etEmergeCont2Name"
+                        android:id="@+id/etEmergeCont2Phone"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="10sp"
+                        android:text="@string/phone"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Facebook"
-                        android:textColor="@color/headings"
-                        android:textSize="13sp" />
+                        android:layout_below="@+id/etEmergeCont2Phone"
+                        android:id="@+id/etEmergeCont2Relationship"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginStart="10sp"
+                        android:text="@string/relationship"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-light"
-                        android:text="facebook.com/joeytrib"
-                        android:textColor="#000000"
-                        android:textSize="18sp" />
+                </RelativeLayout>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="15dp"
-                        android:background="@color/grey" />
+            </androidx.cardview.widget.CardView>
 
-                </LinearLayout>
-
-
-            </LinearLayout>
 
         </RelativeLayout>
+
+       <!--<Button
+            android:id="@+id/btnEditProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relativelayout1.2"
+            android:layout_centerHorizontal="true"
+            android:text="EditProfeile" />!-->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floating_buttonEditProfile"
+            style="@style/Widget.Design.FloatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relativelayout1.2"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="right"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="27dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/editProfile"
+            android:backgroundTint="@color/followingBg"
+            app:srcCompat="@drawable/ic_edit_black_24dp" />
+
+            <!--<com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/relativelayout1.2"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="44dp"
+                android:layout_marginEnd="37dp"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/followingBg"
+                android:contentDescription="@string/editProfile"
+                android:text="@string/editProfile"
+                app:icon="@drawable/ic_edit_black_24dp"
+                app:layout_anchorGravity="right"
+                android:id="@+id/floating_buttonEditProfile"
+                style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+                />-->
+
+
 
     </RelativeLayout>
 
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

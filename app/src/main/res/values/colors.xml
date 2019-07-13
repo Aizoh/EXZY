@@ -15,6 +15,10 @@
     <color name="followersBg">#65DCE5</color>
     <color name="followingBg">#49BEFF</color>
     <color name="grey">#E5E5E5</color>
+    <color name="red">#F50404</color>
 
     <color name="white">#FFFFFF</color>
+
+    <color name="colorEmergencyTitle">#333333</color>
+    <color name="colorEmergencyDescription">#8c8c8c</color>
 </resources>

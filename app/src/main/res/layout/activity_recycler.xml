@@ -8,14 +8,74 @@
     android:orientation="vertical"
     tools:context=".RecyclerActivity">
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBarUser"
+        style="@style/MyToolbar"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_blue_light">
+        <!--<androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            &lt;!&ndash;<TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvCurrentUser"
+                android:text="example@gmail.com"
+                />!&ndash;&gt;
+           &lt;!&ndash; <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvCurrentUser"
+                    android:text="hello"
+                    />
+
+
+            </com.google.android.material.textfield.TextInputLayout>!&ndash;&gt;
+            <Button
+                android:id="@+id/btnCurrentUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/phone" />
+
+           &lt;!&ndash; <Button
+                android:id="@+id/btnEmergencyHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/reportPage" />!&ndash;&gt;
+
+        </androidx.appcompat.widget.LinearLayoutCompat>-->
+        <TextView
+            android:id="@+id/tvCurrentUser"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Toolbar Title"
+            android:textColor="@android:color/white" />
+    </androidx.appcompat.widget.Toolbar>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/reportPage"
+        android:textAlignment="center"
+        android:textColor="@color/red"
+        android:id="@+id/tvReportpg"/>
+
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:scrollbars="vertical">
 
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
     <!--<Button
         android:id="@+id/btnloc"
@@ -24,7 +84,7 @@
         android:layout_marginBottom="50dp"
         android:onClick="onClick"
         android:text="@string/location" />!-->
-    <android.support.design.widget.BottomNavigationView
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1,9 +1,10 @@
-package com.example.app001;
+package com.example.exigent;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -12,8 +13,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.app001.Model.User;
+import com.example.exigent.Model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
@@ -21,8 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.HashMap;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -30,7 +31,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     Button register;
     private FirebaseAuth mAuth;
     ProgressBar progressBar;
-    //private FirebaseUser user = mAuth.getCurrentUser();
+    private static final String TAG = "DBLog";
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +43,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         editTextPassword = findViewById(R.id.eTpass);
         TextView Tvforgotpass = findViewById(R.id.forgot_pass);
         Tvforgotpass.setVisibility(View.INVISIBLE);
-        findViewById(R.id.btnIn).setOnClickListener(this);
+        Button btnIn = findViewById(R.id.btnIn);
+        btnIn.setVisibility(View.INVISIBLE);
+        //findViewById(R.id.btnIn).setOnClickListener(this);
+
         findViewById(R.id.btnup).setOnClickListener(this);
         progressBar = findViewById(R.id.progress_circular);
         progressBar.setVisibility(View.INVISIBLE);
@@ -79,27 +85,80 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         progressBar.setVisibility(View.GONE);
                         if (task.isSuccessful()) {
                             //adding verification
-                            FirebaseUser user = mAuth.getCurrentUser();
+                            FirebaseUser user = mAuth.getInstance().getCurrentUser();
                             //adding a database account for details created
                             String email = user.getEmail();
                             String  uid  = user.getUid();
                             //use the POJO User Object
                           User usersave =  new User();
                             usersave.setEmail(email);
-                            usersave.setId(uid);
+                            //usersave.setId(uid);
                             usersave.setName("");
                             usersave.setPhone("");
+                            usersave.setRegion("");
+                            usersave.seteName1("");
+                            usersave.setePhone1("");
+                            usersave.seteRelationship1("");
+                            usersave.seteName2("");
+                            usersave.setePhone2("");
+                            usersave.setErelationship2("");
 
                             // TODO: 5/27/2019
-                            //Instantiate firebase database
+                            // Instantiate firebase database
+                           // FirebaseDatabase.getInstance().setPersistenceEnabled(true);
                             FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
                             //path to store the data:were storing the information under Users
                             DatabaseReference databaseReference = firebaseDatabase.getReference("Users");
 
-                            databaseReference.child(" UsersProfile").push().setValue(usersave);
+                            databaseReference.child("UsersProfile").push().setValue(usersave).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()){
+                                        Toast.makeText(getApplicationContext(),"Successful user added",
+                                                Toast.LENGTH_LONG).show();
+                                    }else{
 
-                            //END OF FIREBASE REALTIME DATABASE
-                            user.sendEmailVerification()
+                                        Toast.makeText(getApplicationContext(),"Failure adding user",
+                                                Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.e(SignUpActivity.class.getCanonicalName(),e.getMessage());
+                                }
+                            });
+                           // TODO  :25/07/2019 add a firestore database
+                           /*userRef.set(usersave).addOnSuccessListener(new OnSuccessListener<Void>() {
+                               @Override
+                               public void onSuccess(Void aVoid) {
+                                   Toast.makeText(getApplicationContext(),"Successful user added",
+                                           Toast.LENGTH_LONG).show();
+                               }
+                           }).addOnFailureListener(new OnFailureListener() {
+                               @Override
+                               public void onFailure(@NonNull Exception e) {
+
+                               }
+                           });*/
+
+                     /*db.collection("Users").add(usersave).addOnSuccessListener(new
+                              OnSuccessListener<DocumentReference>() {
+                             @Override
+                             public void onSuccess(DocumentReference documentReference) {
+                                 Toast.makeText(getApplicationContext(),"Successful user added",
+                                         Toast.LENGTH_LONG).show();
+
+                             }
+                         }).addOnFailureListener(new OnFailureListener() {
+                             @Override
+                             public void onFailure(@NonNull Exception e) {
+                                 Toast.makeText(getApplicationContext()," user added failure",
+                                         Toast.LENGTH_LONG).show();
+
+                             }
+                         });*/
+                          user.sendEmailVerification()
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
@@ -127,13 +186,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
                         } else {
                             // If sign in fails, display a message to the user.
-                            // Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(getApplicationContext(), "We have encountered an Issue! Try Again Later",
-                                    Toast.LENGTH_SHORT).show();
+                                    Toast.LENGTH_LONG).show();
                            // updateUI(null);
                         }
 
                         // ...
+
                     }
                 });
 
@@ -144,6 +204,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         switch (v.getId()){
             case R.id.btnup:
                 registerUser();
+
                 break;
             case R.id.btnIn:
                 startActivity(new Intent(this,MainActivity.class));

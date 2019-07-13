@@ -1,4 +1,4 @@
-package com.example.app001;
+package com.example.exigent;
 
 import org.junit.Test;
 
