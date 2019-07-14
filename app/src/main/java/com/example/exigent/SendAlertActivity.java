@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.text.util.Linkify;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,6 +43,7 @@ public class SendAlertActivity extends AppCompatActivity  implements View.OnClic
         pgBarEmergency.setVisibility(View.INVISIBLE);
         etMsg = findViewById(R.id.txtMsg);
         etMsg.setText(areaMsg);
+        Linkify.addLinks(etMsg , Linkify.WEB_URLS);
         sendMsg.setOnClickListener(this);
     }
     @Override

@@ -40,11 +40,14 @@ import org.greenrobot.eventbus.ThreadMode;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Pattern;
+
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -174,9 +177,21 @@ public class RecyclerActivity extends AppCompatActivity  implements View.OnClick
         Location loc = mService.getLocation();
         String area = getLocationAddress(loc.getLatitude(), loc.getLongitude());
 
-        String emergency = event.getCaption()+" was Reported at "+ area +" Coordinates"
-                + loc.getLatitude()+","+loc.getLongitude() +"at "+ currentTime ;
+        /*String emergency = event.getCaption()+" was Reported at "+ area +" Coordinates"
+                + loc.getLatitude()+","+loc.getLongitude() +"at "+ currentTime ;*/
+            String link = " http://maps.google.com/?";
 
+            String emergency = event.getCaption()+" was Reported at "+ area +link
+                    + loc.getLatitude()+","+loc.getLongitude() +"at "+ currentTime ;
+
+
+            /*String text = "maps.google.com/?"+ loc.getLongitude()+","+loc.getLatitude();
+            String sceheme = "https://";
+            TextView label = (TextView)findViewById(R.id.textView);
+            label.setText(text);
+            Pattern pattern = Pattern.compile("maps.google.com");
+            Linkify.addLinks(text, pattern, sceheme);
+*/
             Intent i = new Intent(getApplicationContext(), SendAlertActivity.class);
             i.putExtra(MESSAGE,emergency);
             startActivity(i);
