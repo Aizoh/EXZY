@@ -78,20 +78,27 @@ public class SendAlertActivity extends AppCompatActivity  implements View.OnClic
         pgBarEmergency.setVisibility(View.VISIBLE);
         String message = etMsg.getText().toString().trim();
         String phone = "0792640208";
+        String phone1 = "0775526118";
+        String [] phoneNos= new  String []{"0792640208","0775526118"};
         if(message.isEmpty()){
             etMsg.setError("Enter text to send");
             etMsg.requestFocus();
         }
-        // class for sending the text message
-        SmsManager smsManager = SmsManager.getDefault();
-        //for long text messages split
-        List<String> messages = smsManager.divideMessage(message);
-        for (String msg : messages){
+        for ( String phoneNo : phoneNos ){
 
-            PendingIntent sendIntent = PendingIntent.getBroadcast(this,0,new Intent("SMS_SENT"),0);
-            PendingIntent deliveredIntent = PendingIntent.getBroadcast(this,0,new Intent("SMS_DELIVERED"),0);
-            smsManager.sendTextMessage(phone,null,msg,sendIntent,deliveredIntent);
+            // class for sending the text message
+            SmsManager smsManager = SmsManager.getDefault();
+            //for long text messages split
+            List<String> messages = smsManager.divideMessage(message);
+            for (String msg : messages){
+
+                PendingIntent sendIntent = PendingIntent.getBroadcast(this,0,new Intent("SMS_SENT"),0);
+                PendingIntent deliveredIntent = PendingIntent.getBroadcast(this,0,new Intent("SMS_DELIVERED"),0);
+                smsManager.sendTextMessage(phoneNo,null,msg,sendIntent,deliveredIntent);
+            }
+
         }
+
 
         // Progress dialogue
        /* final ProgressDialog msgDialogue = new ProgressDialog(getApplicationContext());
