@@ -93,15 +93,15 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                           User usersave =  new User();
                             usersave.setEmail(email);
                             usersave.setId(uid);
-                            usersave.setName("");
-                            usersave.setPhone("");
-                            usersave.setRegion("");
-                            usersave.seteName1("");
-                            usersave.setePhone1("");
-                            usersave.seteRelationship1("");
-                            usersave.seteName2("");
-                            usersave.setePhone2("");
-                            usersave.setErelationship2("");
+                            usersave.setName("your name");
+                            usersave.setPhone("07XXXXXXX");
+                            usersave.setRegion("Region/Area");
+                            usersave.seteName1("person1 name");
+                            usersave.setePhone1("07XXXXXXX");
+                            usersave.seteRelationship1("relationship");
+                            usersave.seteName2("person2 name");
+                            usersave.setePhone2("07XXXXXXX");
+                            usersave.setERelationship2("relationship");
 
                             // TODO: 5/27/2019
                             // Instantiate firebase database

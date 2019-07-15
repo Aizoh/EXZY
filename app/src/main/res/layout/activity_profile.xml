@@ -75,7 +75,6 @@
                         android:layout_below="@id/relativeLayoutImage"
                         android:layout_centerHorizontal="true"
                         android:layout_marginStart="5dp"
-                        android:text="@string/name"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                         android:textColor="#000000" />
 
@@ -87,7 +86,6 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="5dp"
-                        android:text="@string/emailhint"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 
                     <TextView
@@ -101,7 +99,6 @@
                         android:background="@color/colorPrimary"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
-                        android:text="@string/phone"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
                         android:textStyle="bold" />
 
@@ -114,7 +111,6 @@
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
-                        android:text="@string/region"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                         android:textColor="#F44336"
                         android:textSize="15dp" />
@@ -146,7 +142,6 @@
                         android:id="@+id/etEmergeCont1Name"
                         android:layout_marginTop="10dp"
                         android:layout_marginStart="10sp"
-                        android:text="@string/name"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
                     <TextView
@@ -156,7 +151,6 @@
                         android:id="@+id/etEmergeCont1Phone"
                         android:layout_marginTop="10dp"
                         android:layout_marginStart="10sp"
-                        android:text="@string/phone"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
                     <TextView
@@ -166,7 +160,6 @@
                         android:id="@+id/etEmergeCont1relationship"
                         android:layout_marginTop="10dp"
                         android:layout_marginStart="10sp"
-                        android:text="@string/relationship"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
 
@@ -192,7 +185,6 @@
                         android:id="@+id/etEmergeCont2Name"
                         android:layout_marginTop="10dp"
                         android:layout_marginStart="10sp"
-                        android:text="@string/name"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
                     <TextView
@@ -202,7 +194,6 @@
                         android:id="@+id/etEmergeCont2Phone"
                         android:layout_marginTop="10dp"
                         android:layout_marginStart="10sp"
-                        android:text="@string/phone"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
                     <TextView
@@ -212,7 +203,6 @@
                         android:id="@+id/etEmergeCont2Relationship"
                         android:layout_marginTop="10dp"
                         android:layout_marginStart="10sp"
-                        android:text="@string/relationship"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
                 </RelativeLayout>

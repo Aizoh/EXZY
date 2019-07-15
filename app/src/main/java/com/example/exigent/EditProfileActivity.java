@@ -198,7 +198,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             usersave2.put("ePhone1",ephone1);
             usersave2.put("ePhone2",ephone2);
             usersave2.put("eRelationship1",erelate1);
-            usersave2.put("eRelationship2",erelate2);
+            usersave2.put("erelationship2",erelate2);
 
             profileUpdateRef.updateChildren( usersave2).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override

@@ -32,9 +32,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     FloatingActionButton btnEditProfile;
 
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    DatabaseReference profileDisplayRef = firebaseDatabase.getReference();
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private String currentUserId;
-    private DatabaseReference profileUserRef;
+    private DatabaseReference profileDisplayref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +43,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         imageViewProfile = findViewById(R.id.etImageViewProfile);
         tvName = findViewById(R.id.etName);
         tvEmail = findViewById(R.id.etEmail);
-        tvPhone = findViewById(R.id.tvtPhoneInput);
+        tvPhone = findViewById(R.id.etPhone);
         tvRegion = findViewById(R.id.etRegion);
 
         tvEname1 = findViewById(R.id.etEmergeCont1Name);
@@ -74,22 +75,57 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     public void getDetailsFromFirebase(){
         // assign values to the strings from firebase.
+        mAuth = FirebaseAuth.getInstance();
+        currentUserId = mAuth.getCurrentUser().getUid();
+        FirebaseUser user = mAuth.getInstance().getCurrentUser();
+        String  uid1  = user.getUid();
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            // Name, email address, and profile photo Url
-            //String sname = user.getDisplayName();
+        profileDisplayRef = FirebaseDatabase.getInstance().getReference().child("Users/UsersProfile").child(uid1);
+
             String semail = user.getEmail();
-            //Uri photoUrl = user.getPhotoUrl()
-
-            // The user's ID, unique to the Firebase project. Do NOT use this value to
-            // authenticate with your backend server, if you have one. Use
-            // FirebaseUser.getToken() instead.
-            String uid = user.getUid();
             tvEmail.setText(semail);
 
 
-        }
+
+        profileDisplayRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.exists()){
+
+
+                    String sname = dataSnapshot.child("name").getValue().toString();
+                    String sphone =dataSnapshot.child("phone").getValue().toString();
+                    String sregion= dataSnapshot.child("region").getValue().toString();
+                    //String semail= dataSnapshot.child("email").getValue().toString();
+                    String sename1 = dataSnapshot.child("eName1").getValue().toString();
+                    String sephone1 = dataSnapshot.child("ePhone1").getValue().toString();
+                    String serelate1= dataSnapshot.child("eRelationship1").getValue().toString();
+                    String sename2 = dataSnapshot.child("eName2").getValue().toString();
+                    String sephone2 = dataSnapshot.child("ePhone2").getValue().toString();
+                    String serelate2 = dataSnapshot.child("erelationship2").getValue().toString();
+
+                    tvName.setText(sname);
+                    tvPhone.setText(sphone);
+                    tvRegion.setText(sregion);
+                    tvEname1.setText(sename1);
+                    tvEphone1.setText(sephone1);
+                    tvErelationship1.setText(serelate1);
+                    tvEname2.setText(sename2);
+                    tvEphone2.setText(sephone2);
+                    tvErelationship2.setText(serelate2);
+                }
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+
+            }
+        });
 
         /*//FirebaseUser user = mAuth.getCurrentUser();
         currentUserId = mAuth.getCurrentUser().getUid();
@@ -147,5 +183,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         tvEname2.setText(pename1);
         tvEphone2.setText(pephone2);
         tvErelationship2.setText(perelate2);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getDetailsFromFirebase();
     }
 }
