@@ -11,7 +11,7 @@ public class User {
     String email;
     String id;
     String phone;
-    private String eName1,eName2,eRelationship1,erelationship2;
+    private String eName1,eName2,eRelationship1,eRelationship2;
     private String ePhone1,ePhone2;
 
     public User() {
@@ -48,12 +48,12 @@ public class User {
         this.eRelationship1 = eRelationship1;
     }
 
-    public String getErelationship2() {
-        return erelationship2;
+    public String getERelationship2() {
+        return eRelationship2;
     }
 
-    public void setErelationship2(String erelationship2) {
-        this.erelationship2 = erelationship2;
+    public void setERelationship2(String eRelationship2) {
+        this.eRelationship2 = eRelationship2;
     }
 
     public String getePhone1() {

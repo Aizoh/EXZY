@@ -92,7 +92,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             //use the POJO User Object
                           User usersave =  new User();
                             usersave.setEmail(email);
-                            //usersave.setId(uid);
+                            usersave.setId(uid);
                             usersave.setName("");
                             usersave.setPhone("");
                             usersave.setRegion("");
@@ -110,7 +110,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             //path to store the data:were storing the information under Users
                             DatabaseReference databaseReference = firebaseDatabase.getReference("Users");
 
-                            databaseReference.child("UsersProfile").push().setValue(usersave).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            databaseReference.child("UsersProfile").child(uid).setValue(usersave).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){
