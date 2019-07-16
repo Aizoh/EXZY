@@ -72,7 +72,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_alignTop="@+id/tvNameInput"
-                            android:text="@string/name" />
+                            />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -92,7 +92,7 @@
                             android:id="@+id/etEmail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/emailhint" />
+                             />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -114,7 +114,7 @@
                             android:id="@+id/etPhone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/phone" />
+                             />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -135,7 +135,7 @@
                             android:id="@+id/etRegion"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/region" />
+                             />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -174,7 +174,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10sp"
                             android:layout_marginTop="5dp"
-                            android:text="@string/name" />
+                             />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -192,7 +192,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10sp"
                             android:layout_marginTop="5dp"
-                            android:text="@string/phone" />
+                             />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -210,7 +210,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10sp"
                             android:layout_marginTop="5dp"
-                            android:text="@string/relationship" />
+                             />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -244,7 +244,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10sp"
                             android:layout_marginTop="5dp"
-                            android:text="@string/name" />
+                            />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -264,7 +264,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10sp"
                             android:layout_marginTop="5dp"
-                            android:text="@string/phone" />
+                             />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -283,7 +283,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10sp"
                             android:layout_marginTop="5dp"
-                            android:text="@string/relationship" />
+                             />
 
                     </com.google.android.material.textfield.TextInputLayout>
 

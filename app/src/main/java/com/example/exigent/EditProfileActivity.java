@@ -23,8 +23,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -46,6 +49,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     DatabaseReference profileUpdateRef = firebaseDatabase.getReference();
+    DatabaseReference currentDetailsRef = firebaseDatabase.getReference();
     private FirebaseAuth mAuth;
     private  String currentUserId;
 
@@ -97,8 +101,60 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         etEphone2.setOnClickListener(this);
         etErelationship2.setOnClickListener(this);
         btnUpdateprofile.setOnClickListener(this);
+        displayCurrentDetails();
     }
     //to pick the changes and populate in firebase db
+    public void displayCurrentDetails(){
+
+        mAuth = FirebaseAuth.getInstance();
+        currentUserId = mAuth.getCurrentUser().getUid();
+        FirebaseUser user = mAuth.getInstance().getCurrentUser();
+        currentUserId  = user.getUid();
+
+        currentDetailsRef = FirebaseDatabase.getInstance().getReference().child("Users/UsersProfile").child(currentUserId);
+
+        currentDetailsRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.exists()){
+
+                    String sname = dataSnapshot.child("name").getValue().toString();
+                    String sphone =dataSnapshot.child("phone").getValue().toString();
+                    String sregion= dataSnapshot.child("region").getValue().toString();
+                    String semail= dataSnapshot.child("email").getValue().toString();
+                    String sename1 = dataSnapshot.child("eName1").getValue().toString();
+                    String sephone1 = dataSnapshot.child("ePhone1").getValue().toString();
+                    String serelate1= dataSnapshot.child("eRelationship1").getValue().toString();
+                    String sename2 = dataSnapshot.child("eName2").getValue().toString();
+                    String sephone2 = dataSnapshot.child("ePhone2").getValue().toString();
+                    String serelate2 = dataSnapshot.child("erelationship2").getValue().toString();
+
+                    // set the input fields to the current data in firebase db.
+
+                    etName.setText(sname);
+                    etPhone.setText(sphone);
+                    etRegion.setText(sregion);
+                    etEmail.setText(semail);
+
+                    etEname1.setText(sename1);
+                    etEphone1.setText(sephone1);
+                    etErelationship1.setText(serelate1);
+                    etEname2.setText(sename2);
+                    etEphone2.setText(sephone2);
+                    etErelationship2.setText(serelate2);
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
     public void updateProfile(){
 
         name = etName.getText().toString().trim();
@@ -339,5 +395,11 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                     Toast.LENGTH_LONG).show();
             //you can display an error toast
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        displayCurrentDetails();
     }
 }
