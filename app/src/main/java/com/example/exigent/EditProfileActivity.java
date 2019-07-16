@@ -33,6 +33,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -54,8 +55,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     private  String currentUserId;
 
 
-    FirebaseStorage storage = FirebaseStorage.getInstance();
-    StorageReference storageRef = storage.getReference();
+    FirebaseStorage imageStorage = FirebaseStorage.getInstance();
+    StorageReference profileImageStorageRef = imageStorage.getReference();
 
     private static final int PICK_IMAGE_REQUEST = 234;
     private Uri imagefilePath;
@@ -307,7 +308,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 */
         //databaseReference updateRefference = databaseReference.child("Users").child("UsersProfile").child(user.getUid());
 
-
+        uploadImageFile();
 
     }
     //cancel and go back to profile
@@ -347,6 +348,14 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     }
     //upload image independently
     private void uploadImageFile() {
+
+        FirebaseUser user = mAuth.getInstance().getCurrentUser();
+        currentUserId  = user.getUid();
+
+        /*mAuth = FirebaseAuth.getInstance();
+        currentUserId = mAuth.getCurrentUser().getUid();*/
+        //File file = new File( imagefilePath, "profile.jpg");
+
         //if there is a file to upload
         if (imagefilePath != null) {
             //displaying a progress dialog while upload is going on
@@ -354,8 +363,10 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             progressDialog.setTitle("Uploading");
             progressDialog.show();
 
-            StorageReference riversRef = storageRef.child("images/pic.jpg");
-            riversRef.putFile(imagefilePath)
+            Uri imageFile = Uri.fromFile(new File(String.valueOf(imagefilePath)));
+
+            StorageReference profileImgRef = profileImageStorageRef.child("images").child("profileImages").child(currentUserId).child("profile.jpg");
+            profileImgRef.putFile(imagefilePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
