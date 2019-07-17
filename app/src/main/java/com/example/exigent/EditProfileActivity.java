@@ -2,9 +2,12 @@ package com.example.exigent;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -84,10 +87,25 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         etImageViewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
+                try {
+                    if (ActivityCompat.checkSelfPermission(EditProfileActivity.this,
+                            Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(EditProfileActivity.this,
+                                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, PICK_IMAGE_REQUEST);
+                    } else {
+
+                        Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        galleryIntent.setType("image/*");
+                        startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                /*Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);*/
             }
         });
         etName.setOnClickListener(this);
@@ -103,6 +121,24 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         etErelationship2.setOnClickListener(this);
         btnUpdateprofile.setOnClickListener(this);
         displayCurrentDetails();
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults)
+    {
+        switch (requestCode) {
+            case PICK_IMAGE_REQUEST:
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    galleryIntent.setType("image/*");
+                    startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST);
+                } else {
+                    //do something like displaying a message that he didn`t allow the app to access gallery and you wont be able to let him select from gallery
+                }
+                break;
+        }
     }
     //to pick the changes and populate in firebase db
     public void displayCurrentDetails(){
@@ -270,43 +306,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 }
             });
 
-           /* DatabaseReference updateData = FirebaseDatabase.getInstance()
-                    .getReference("Users/UsersProfile")
-                    .child(user.getUid());
-            updateData.child("eName1").setValue(ename1);
-            updateData.child("eName2").setValue(ename2);
-            updateData.child("ePhone1").setValue(ephone1);
-            updateData.child("ePhone2").setValue(ephone2);
-            updateData.child("eRelationship1").setValue(erelate1);
-            updateData.child("eRelationship2").setValue(erelate2);
-            updateData.child("name").setValue(name);
-            updateData.child("phone").setValue(phone);
-            updateData.child("region").setValue(region);*/
 
 
-
-
-        /*databaseReference.child("UsersProfile").child(user.getUid()).setValue(usersave1).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()){
-                    Toast.makeText(getApplicationContext(),"Successful Updated Details",
-                            Toast.LENGTH_LONG).show();
-
-                }else{
-
-                    Toast.makeText(getApplicationContext(),"Failure Updating Details",
-                            Toast.LENGTH_LONG).show();
-                }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.e(SignUpActivity.class.getCanonicalName(),e.getMessage());
-            }
-        });
-*/
-        //databaseReference updateRefference = databaseReference.child("Users").child("UsersProfile").child(user.getUid());
 
         uploadImageFile();
 
@@ -337,6 +338,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             imagefilePath = data.getData();
+
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imagefilePath);
                 etImageViewProfile.setImageBitmap(bitmap);
@@ -344,69 +346,67 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
         }
     }
+
     //upload image independently
     private void uploadImageFile() {
+            //if there is a file to upload
+            if (imagefilePath != null) {
+                //displaying a progress dialog while upload is going on
+                final ProgressDialog progressDialog = new ProgressDialog(this);
+                progressDialog.setTitle("Uploading");
+                progressDialog.show();
 
-        FirebaseUser user = mAuth.getInstance().getCurrentUser();
-        currentUserId  = user.getUid();
+                //Uri imageFile = Uri.fromFile(new File(String.valueOf(imagefilePath)));
+                FirebaseStorage imageStorage = FirebaseStorage.getInstance();
+                StorageReference profileImageStorageRef = imageStorage.getReference();
 
-        /*mAuth = FirebaseAuth.getInstance();
-        currentUserId = mAuth.getCurrentUser().getUid();*/
-        //File file = new File( imagefilePath, "profile.jpg");
+                FirebaseUser user = mAuth.getInstance().getCurrentUser();
+                String  uid1  = user.getUid();
+                currentUserId  = user.getUid();
 
-        //if there is a file to upload
-        if (imagefilePath != null) {
-            //displaying a progress dialog while upload is going on
-            final ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setTitle("Uploading");
-            progressDialog.show();
+                StorageReference profileImgRef = profileImageStorageRef.child("profileImages").child(currentUserId +".jpg");
+                profileImgRef.putFile(imagefilePath)
+                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                //if the upload is successfull
+                                //hiding the progress dialog
+                                progressDialog.dismiss();
 
-            Uri imageFile = Uri.fromFile(new File(String.valueOf(imagefilePath)));
+                                //and displaying a success toast
+                                Toast.makeText(getApplicationContext(), "File Uploaded ", Toast.LENGTH_LONG).show();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                //if the upload is not successfull
+                                //hiding the progress dialog
+                                progressDialog.dismiss();
 
-            StorageReference profileImgRef = profileImageStorageRef.child("images").child("profileImages").child(currentUserId).child("profile.jpg");
-            profileImgRef.putFile(imagefilePath)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            //if the upload is successfull
-                            //hiding the progress dialog
-                            progressDialog.dismiss();
+                                //and displaying error message
+                                Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        })
+                        .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                                //calculating progress percentage
+                                double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
 
-                            //and displaying a success toast
-                            Toast.makeText(getApplicationContext(), "File Uploaded ", Toast.LENGTH_LONG).show();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            //if the upload is not successfull
-                            //hiding the progress dialog
-                            progressDialog.dismiss();
-
-                            //and displaying error message
-                            Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            //calculating progress percentage
-                            double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-
-                            //displaying percentage in progress dialog
-                            progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
-                        }
-                    });
+                                //displaying percentage in progress dialog
+                                progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
+                            }
+                        });
+                }else {
+                Toast.makeText(getApplicationContext(),"failed uploading...try again later",
+                        Toast.LENGTH_LONG).show();
+                //you can display an error toast
+            }
         }
-        //if there is not any file
-        else {
-            Toast.makeText(getApplicationContext(),"failed uploading...try again later",
-                    Toast.LENGTH_LONG).show();
-            //you can display an error toast
-        }
-    }
 
     @Override
     protected void onResume() {

@@ -28,6 +28,8 @@ dependencies {
     implementation 'androidx.vectordrawable:vectordrawable-animated:1.0.0'
     implementation 'androidx.media:media:1.0.0'
     //adding recycler view
+    //image cropping
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     //
     implementation 'com.google.firebase:firebase-core:17.0.0'
