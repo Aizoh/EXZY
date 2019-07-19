@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Build;
+
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +24,14 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.List;
 
 import static android.Manifest.permission.SEND_SMS;
@@ -32,6 +42,11 @@ public class SendAlertActivity extends AppCompatActivity  implements View.OnClic
     private BroadcastReceiver sentStatusReceiver, deliveredStatusReceiver;
     private static final int REQUEST_SMS = 0;
     ProgressBar pgBarEmergency;
+
+    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    DatabaseReference currentEmergencyDetailsRef = firebaseDatabase.getReference();
+    private FirebaseAuth mAuth;
+    String currentUserId,sephone1,sephone2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +60,31 @@ public class SendAlertActivity extends AppCompatActivity  implements View.OnClic
         etMsg.setText(areaMsg);
         Linkify.addLinks(etMsg , Linkify.WEB_URLS);
         sendMsg.setOnClickListener(this);
+        FirebaseUser user = mAuth.getInstance().getCurrentUser();
+        currentUserId  = user.getUid();
+        getEmergencyContact();
+    }
+
+    public void getEmergencyContact(){
+        currentEmergencyDetailsRef = FirebaseDatabase.getInstance().getReference().child("Users/UsersProfile").child(currentUserId);
+        currentEmergencyDetailsRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()){
+                    sephone1 = dataSnapshot.child("ePhone1").getValue().toString();
+                    sephone2 = dataSnapshot.child("ePhone2").getValue().toString();
+
+                }else {
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
     @Override
     public void onClick(View v) {
@@ -78,8 +118,8 @@ public class SendAlertActivity extends AppCompatActivity  implements View.OnClic
         pgBarEmergency.setVisibility(View.VISIBLE);
         String message = etMsg.getText().toString().trim();
         String phone = "0792640208";
-        String phone1 = "0775526118";
-        String [] phoneNos= new  String []{"0792640208","0775526118"};
+        //String phone1 = "0775526118";
+        String [] phoneNos= new  String []{phone,sephone1,sephone2};
         if(message.isEmpty()){
             etMsg.setError("Enter text to send");
             etMsg.requestFocus();

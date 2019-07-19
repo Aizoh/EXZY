@@ -29,7 +29,6 @@ dependencies {
     implementation 'androidx.media:media:1.0.0'
     //adding recycler view
     //image cropping
-    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     //
     implementation 'com.google.firebase:firebase-core:17.0.0'
@@ -48,4 +47,5 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0'
 }

@@ -50,6 +50,7 @@
         </activity>
 
         <service android:name=".GPSService" />
+
     </application>
 
 </manifest>

@@ -2,11 +2,13 @@ package com.example.exigent;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -41,6 +43,14 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         imageViewProfile = findViewById(R.id.etImageViewProfile);
+
+        Toolbar toolbarProfile = findViewById(R.id.toolBarUserProfile);
+        setSupportActionBar(toolbarProfile);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        TextView tvProfile = findViewById(R.id.tvProfile);
+        //Button btnEmergencyTopic = findViewById(R.id.btnemergencyTopic);
+
         tvName = findViewById(R.id.etName);
         tvEmail = findViewById(R.id.etEmail);
         tvPhone = findViewById(R.id.etPhone);
@@ -183,6 +193,12 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         tvEname2.setText(pename1);
         tvEphone2.setText(pephone2);
         tvErelationship2.setText(perelate2);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity( new Intent(ProfileActivity.this,MainActivity.class));
     }
 
     @Override

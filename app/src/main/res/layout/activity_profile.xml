@@ -5,9 +5,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProfileActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBarUserProfile"
+        style="@style/MyToolbar"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_blue_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvProfile"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/profile"
+            android:textColor="@android:color/white" />
+
+    </androidx.appcompat.widget.Toolbar>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -16,7 +40,7 @@
             android:id="@+id/relativelayout1.2">
 
 
-            <TextView
+            <!--<TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/profile"
@@ -24,13 +48,12 @@
                 android:id="@+id/txt123"
 
                 android:layout_alignParentTop="true"
-                android:textStyle="bold" />
+                android:textStyle="bold" />-->
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/cardviewProfile"
-                android:layout_below="@+id/txt123"
                 android:layout_margin="5dp"
                 android:padding="10dp"
                 android:background="@drawable/grad"
@@ -120,12 +143,32 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardviewEmergencyHeading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cardviewProfile"
+                app:cardBackgroundColor="@android:color/white">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnemergencyTopic"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#FDFDFE"
+                    android:text="@string/emergencyTopic"
+                    android:textColor="@android:color/black"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+                    android:textSize="18sp" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:padding="10dp"
                 android:id="@+id/cardviewEmergencyContact"
-                android:layout_below="@+id/cardviewProfile"
+                android:layout_below="@+id/cardviewEmergencyHeading"
                 app:cardCornerRadius="10dp">
 
                 <RelativeLayout

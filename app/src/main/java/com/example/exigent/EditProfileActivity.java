@@ -2,6 +2,7 @@ package com.example.exigent;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.exigent.Model.User;
@@ -35,6 +37,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
@@ -58,23 +61,29 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     private  String currentUserId;
 
 
-    FirebaseStorage imageStorage = FirebaseStorage.getInstance();
-    StorageReference profileImageStorageRef = imageStorage.getReference();
+    //FirebaseStorage imageStorage = FirebaseStorage.getInstance();
+    StorageReference profileImageStorageRef;
 
     private static final int PICK_IMAGE_REQUEST = 234;
-    private Uri imagefilePath;
+    private Uri imagefilePath, resultUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
-        btnUpdateprofile = findViewById(R.id.btnUpdateprofile);
-        btnCancelEdit = findViewById(R.id.btnCancelEdit);
+
+        Toolbar editProfileToolbar = findViewById(R.id.toolBarEditUserProfile);
+        setSupportActionBar(editProfileToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        TextView tvEditProfile = findViewById(R.id.tvEditProfile);
+
+        btnUpdateprofile = findViewById(R.id.btnUpdateProfile);
+        //btnCancelEdit = findViewById(R.id.btnCancelEdit);
         etImageViewProfile = findViewById(R.id.etImageViewProfile);
         etName = findViewById(R.id.etName);
         etPhone = findViewById(R.id.etPhone);
         etRegion = findViewById(R.id.etRegion);
-        etEmail = findViewById(R.id.etEmail);
+        //etEmail = findViewById(R.id.etEmail);
 
         etEname1 = findViewById(R.id.etEmergeCont1Name);
         etEphone1 = findViewById(R.id.etEmergeCont1Phone);
@@ -111,7 +120,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         etName.setOnClickListener(this);
         etPhone.setOnClickListener(this);
         etRegion.setOnClickListener(this);
-        etEmail.setOnClickListener(this);
+       // etEmail.setOnClickListener(this);
 
         etEname1.setOnClickListener(this);
         etEphone1.setOnClickListener(this);
@@ -120,6 +129,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         etEphone2.setOnClickListener(this);
         etErelationship2.setOnClickListener(this);
         btnUpdateprofile.setOnClickListener(this);
+
+        FirebaseStorage imageStorage = FirebaseStorage.getInstance();
+        profileImageStorageRef = imageStorage.getReference("Profile images");
         displayCurrentDetails();
     }
 
@@ -159,7 +171,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                     String sname = dataSnapshot.child("name").getValue().toString();
                     String sphone =dataSnapshot.child("phone").getValue().toString();
                     String sregion= dataSnapshot.child("region").getValue().toString();
-                    String semail= dataSnapshot.child("email").getValue().toString();
+                    //String semail= dataSnapshot.child("email").getValue().toString();
                     String sename1 = dataSnapshot.child("eName1").getValue().toString();
                     String sephone1 = dataSnapshot.child("ePhone1").getValue().toString();
                     String serelate1= dataSnapshot.child("eRelationship1").getValue().toString();
@@ -172,7 +184,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                     etName.setText(sname);
                     etPhone.setText(sphone);
                     etRegion.setText(sregion);
-                    etEmail.setText(semail);
+                    //etEmail.setText(semail);
 
                     etEname1.setText(sename1);
                     etEphone1.setText(sephone1);
@@ -197,7 +209,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         name = etName.getText().toString().trim();
         phone = etPhone.getText().toString().trim();
         region = etRegion.getText().toString().trim();
-        email = etEmail.getText().toString().trim();
+        //email = etEmail.getText().toString().trim();
 
         ename1 = etEname1.getText().toString().trim();
         ephone1 = etEphone1.getText().toString().trim();
@@ -221,11 +233,11 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             etRegion.requestFocus();
             return;
         }
-        if(email.isEmpty()){
+        /*if(email.isEmpty()){
             etEmail.setError("Enter email ");
             etEmail.requestFocus();
             return;
-        }
+        }*/
         ///emergency contact
         if(ename1.isEmpty()){
             etEname1.setError("Enter name  ");
@@ -284,7 +296,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         HashMap usersave2 = new HashMap();
             usersave2.put("name",name);
             usersave2.put("phone",phone);
-            usersave2.put("email",email);
+            //usersave2.put("email",email);
             usersave2.put("region",region);
             usersave2.put("eName1",ename1);
             usersave2.put("eName2",ename2);
@@ -310,6 +322,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
 
         uploadImageFile();
+        Toast.makeText(getApplicationContext(),"profile updated",Toast.LENGTH_LONG).show();
 
     }
     //cancel and go back to profile
@@ -322,13 +335,13 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btnUpdateprofile:
+            case R.id.btnUpdateProfile:
                 updateProfile();
-                Toast.makeText(getApplicationContext(),"profile updated",Toast.LENGTH_LONG).show();
+
                 break;
-            case R.id.btnCancelEdit:
+            /*case R.id.btnCancelEdit:
                 cancelUpdate();
-                break;
+                break;*/
         }
 
     }
@@ -339,6 +352,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             imagefilePath = data.getData();
 
+
+        }
+
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imagefilePath);
                 etImageViewProfile.setImageBitmap(bitmap);
@@ -347,7 +363,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 e.printStackTrace();
             }
 
-        }
+
     }
 
     //upload image independently
@@ -359,15 +375,14 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 progressDialog.setTitle("Uploading");
                 progressDialog.show();
 
-                //Uri imageFile = Uri.fromFile(new File(String.valueOf(imagefilePath)));
-                FirebaseStorage imageStorage = FirebaseStorage.getInstance();
-                StorageReference profileImageStorageRef = imageStorage.getReference();
+                //Uri imageFile = Uri.fromFile(new File(String.val ueOf(imagefilePath)));
+
 
                 FirebaseUser user = mAuth.getInstance().getCurrentUser();
                 String  uid1  = user.getUid();
                 currentUserId  = user.getUid();
 
-                StorageReference profileImgRef = profileImageStorageRef.child("profileImages").child(currentUserId +".jpg");
+                final StorageReference profileImgRef = profileImageStorageRef.child("profile image"+currentUserId +".jpg");
                 profileImgRef.putFile(imagefilePath)
                         .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
@@ -378,6 +393,17 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
                                 //and displaying a success toast
                                 Toast.makeText(getApplicationContext(), "File Uploaded ", Toast.LENGTH_LONG).show();
+                                profileImgRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+
+                                        Picasso.with(getApplicationContext())
+                                                .load(uri)
+                                                .into(etImageViewProfile);
+
+
+                                    }
+                                });
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
@@ -409,8 +435,21 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(EditProfileActivity.this,ProfileActivity.class));
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         displayCurrentDetails();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        currentUserId = currentUser.getUid();
     }
 }
