@@ -14,6 +14,13 @@
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_action_exit"/>
     <item
+        android:id="@+id/action_history"
+        android:title="History"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_history_black_24dp"/>
+
+
+    <item
         android:id="@+id/action_guide"
         android:enabled="true"
         android:title="Guide"

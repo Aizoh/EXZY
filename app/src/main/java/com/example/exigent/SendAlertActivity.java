@@ -24,6 +24,9 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.exigent.Model.Messages;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -32,6 +35,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import static android.Manifest.permission.SEND_SMS;
@@ -45,8 +51,9 @@ public class SendAlertActivity extends AppCompatActivity  implements View.OnClic
 
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     DatabaseReference currentEmergencyDetailsRef = firebaseDatabase.getReference();
+    DatabaseReference currentEmergencyRecordRef = firebaseDatabase.getReference();
     private FirebaseAuth mAuth;
-    String currentUserId,sephone1,sephone2;
+    String currentUserId,sephone1,sephone2,currenUserEmail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +69,7 @@ public class SendAlertActivity extends AppCompatActivity  implements View.OnClic
         sendMsg.setOnClickListener(this);
         FirebaseUser user = mAuth.getInstance().getCurrentUser();
         currentUserId  = user.getUid();
+        currenUserEmail= user.getEmail();
         getEmergencyContact();
     }
 
@@ -134,11 +142,38 @@ public class SendAlertActivity extends AppCompatActivity  implements View.OnClic
 
                 PendingIntent sendIntent = PendingIntent.getBroadcast(this,0,new Intent("SMS_SENT"),0);
                 PendingIntent deliveredIntent = PendingIntent.getBroadcast(this,0,new Intent("SMS_DELIVERED"),0);
+                //smsManager.sendTextMessage(phoneNo,,msg,sendIntent,deliveredIntent);
                 smsManager.sendTextMessage(phoneNo,null,msg,sendIntent,deliveredIntent);
             }
 
         }
+        Date currentTime = Calendar.getInstance().getTime();
+        String dateTime = currentTime.toString();
 
+        currentEmergencyRecordRef = firebaseDatabase.getReference().child("Emergencies").child(currentUserId);
+        Messages message1 = new Messages();
+        message1.setDate(dateTime);
+        message1.setMessage(message);
+
+/*        HashMap emergency = new HashMap();
+        emergency.put("Date",currentTime);
+        emergency.put("Message",message);*/
+        currentEmergencyRecordRef.push().setValue(message1).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+                if (task.isSuccessful()){
+
+                    Toast.makeText(getApplicationContext(),"Added to Records",
+                            Toast.LENGTH_SHORT).show();
+
+                }else {
+                    Toast.makeText(getApplicationContext(),"Failed to add to Records",
+                            Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
 
         // Progress dialogue
        /* final ProgressDialog msgDialogue = new ProgressDialog(getApplicationContext());

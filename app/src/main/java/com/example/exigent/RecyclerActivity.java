@@ -151,6 +151,11 @@ public class RecyclerActivity extends AppCompatActivity  implements View.OnClick
                         Toast.makeText(getApplicationContext(),"Guide page",
                                 Toast.LENGTH_SHORT).show();
                         break;
+                    case R.id.action_history:
+                        startActivity( new Intent(getApplicationContext(),RecordsActivity.class));
+                        Toast.makeText(getApplicationContext(),"Your history",
+                                Toast.LENGTH_SHORT).show();
+                        break;
                 }
                 return ;
             }

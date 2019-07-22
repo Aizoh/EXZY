@@ -27,7 +27,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
-    EditText editTextEmail, editTextPassword;
+    EditText editTextName, editTextEmail, editTextPassword,editTextPhone,editTextRegion;
     Button register;
     private FirebaseAuth mAuth;
     ProgressBar progressBar;
@@ -39,24 +39,34 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_sing_up);
-        editTextEmail = findViewById(R.id.eTmail);
-        editTextPassword = findViewById(R.id.eTpass);
-        TextView Tvforgotpass = findViewById(R.id.forgot_pass);
+        editTextName = findViewById(R.id.etName);
+        editTextEmail = findViewById(R.id.etEmail);
+        editTextPassword = findViewById(R.id.etPass);
+        editTextPhone = findViewById(R.id.etPhone);
+        editTextRegion = findViewById(R.id.etRegion);
+        /*TextView Tvforgotpass = findViewById(R.id.forgot_pass);
         Tvforgotpass.setVisibility(View.INVISIBLE);
         Button btnIn = findViewById(R.id.btnIn);
-        btnIn.setVisibility(View.INVISIBLE);
+        btnIn.setVisibility(View.INVISIBLE);*/
         //findViewById(R.id.btnIn).setOnClickListener(this);
 
-        findViewById(R.id.btnup).setOnClickListener(this);
-        progressBar = findViewById(R.id.progress_circular);
+        findViewById(R.id.btnSignUp).setOnClickListener(this);
+        progressBar = findViewById(R.id.progress_circularReg);
         progressBar.setVisibility(View.INVISIBLE);
         FirebaseApp.initializeApp(SignUpActivity.this);
         mAuth = FirebaseAuth.getInstance();
     }
     private  void registerUser(){
+        final String name = editTextName.getText().toString().trim();
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
-
+        final String phone = editTextPhone.getText().toString().trim();
+        final String region = editTextRegion.getText().toString().trim();
+        if (name.isEmpty()){
+            editTextName.setError("Enter name");
+            editTextName.requestFocus();
+            return;
+        }
         if(email.isEmpty()){
             editTextEmail.setError("Enter email ");
             editTextEmail.requestFocus();
@@ -77,6 +87,21 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             editTextPassword.requestFocus();
             return;
         }
+        if(phone.isEmpty()){
+            editTextPhone.setError("Enter phone number");
+            editTextPhone.requestFocus();
+            return;
+        }
+        if (phone.length()<10){
+            editTextPhone.setError("Invalid Phone number");
+            editTextPhone.requestFocus();
+            return;
+        }
+        if (region.isEmpty()){
+            editTextRegion.setError("Enter region");
+            editTextRegion.requestFocus();
+            return;
+        }
         progressBar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -93,9 +118,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                           User usersave =  new User();
                             usersave.setEmail(email);
                             usersave.setId(uid);
-                            usersave.setName("your name");
-                            usersave.setPhone("07XXXXXXX");
-                            usersave.setRegion("Region/Area");
+                            usersave.setName(name);
+                            usersave.setPhone(phone);
+                            usersave.setRegion(region);
                             usersave.seteName1("person1 name");
                             usersave.setePhone1("07XXXXXXX");
                             usersave.seteRelationship1("relationship");
@@ -167,8 +192,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                         // Sign in success, update UI with the signed-in user's information
                                         Toast.makeText(getApplicationContext(), "Registration was successful check your email for verification",
                                                 Toast.LENGTH_SHORT).show();
+                                        editTextName.setText("");
                                         editTextEmail.setText("");
                                         editTextPassword.setText("");
+                                        editTextPhone.setText("");
+                                        editTextRegion.setText("");
+
 
                                         // updateUI(user);
 
@@ -202,7 +231,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btnup:
+            case R.id.btnSignUp:
                 registerUser();
 
                 break;
@@ -211,5 +240,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(SignUpActivity.this,MainActivity.class));
     }
 }

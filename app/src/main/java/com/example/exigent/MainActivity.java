@@ -2,9 +2,11 @@ package com.example.exigent;
 
 import android.content.Intent;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Patterns;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -23,6 +26,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     EditText Etmail,Etpass;
     ProgressBar progressBar;
+
+    //sign up
+    EditText etReg_name, etPassword, etReg_password,
+            etReg_region, etReg_phone, etReg_email, etReg_confirmemail;
+    Button btnReg_register;
+
 
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
@@ -122,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btnup:
+                //registerUser();
                 startActivity(new Intent(this, SignUpActivity.class));
 
                 break;
@@ -133,7 +143,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
-   private void isUserLoggedIn(){
+
+
+
+    private void isUserLoggedIn(){
         //User is logged in skip logging in
         if(firebaseAuth.getCurrentUser()!=null){
             startActivity(new Intent(MainActivity.this, RecyclerActivity.class));

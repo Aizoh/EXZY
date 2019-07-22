@@ -29,4 +29,7 @@
     <string name="emergencyTopic">My Emergency Contacts</string>
     <string name="UrlLink">http://</string>
     <string name="update">Update</string>
+    <string name="registration">Register Here</string>
+    <string name="Username">Name</string>
+    <string name="confirmEmail">Confirm Mail</string>
 </resources>

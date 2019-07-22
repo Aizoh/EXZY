@@ -21,4 +21,5 @@
 
     <color name="colorEmergencyTitle">#333333</color>
     <color name="colorEmergencyDescription">#8c8c8c</color>
+    <color name="black">#000000</color>
 </resources>

@@ -63,7 +63,7 @@
                 android:background="@android:color/holo_blue_light"
                 android:layout_height="wrap_content"
                 style="@style/Buttonstyle"
-                android:text="@string/signUp"
+                android:text="@string/register"
                  />
             <androidx.legacy.widget.Space
                 android:layout_width="match_parent"
