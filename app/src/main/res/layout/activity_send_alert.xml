@@ -5,6 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SendAlertActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBarSendMessage"
+        style="@style/MyToolbar"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_blue_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvSendMessage"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/submitText"
+            android:textColor="@android:color/white" />
+
+    </androidx.appcompat.widget.Toolbar>
+
 
     <EditText
         android:id="@+id/txtMsg"
@@ -38,7 +60,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtMsg" />
+        app:layout_constraintTop_toBottomOf="@+id/txtMsg"
+        android:backgroundTint="@android:color/holo_blue_light"/>
 
     <ProgressBar
         android:id="@+id/progressBarEmergency"

@@ -66,7 +66,8 @@
         android:text="@string/reportPage"
         android:textAlignment="center"
         android:textColor="@color/red"
-        android:id="@+id/tvReportpg"/>
+        android:id="@+id/tvReportpg"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -89,9 +90,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:menu="@menu/bottom_nav_menu"
+        android:layout_gravity="center"
         app:itemBackground="@android:color/holo_blue_light"
         app:itemIconTint="@android:color/white"
         app:itemTextColor="@android:color/white"
-        android:layout_gravity="center"/>
+        app:menu="@menu/bottom_nav_menu" />
 </LinearLayout>

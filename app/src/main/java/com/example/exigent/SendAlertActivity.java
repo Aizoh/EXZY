@@ -12,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +23,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.exigent.Model.Messages;
@@ -45,6 +47,8 @@ import static android.Manifest.permission.SEND_SMS;
 public class SendAlertActivity extends AppCompatActivity  implements View.OnClickListener{
 
     EditText etMsg;
+    TextView tvSendMessage;
+    Toolbar toolbarSendMessage;
     private BroadcastReceiver sentStatusReceiver, deliveredStatusReceiver;
     private static final int REQUEST_SMS = 0;
     ProgressBar pgBarEmergency;
@@ -60,6 +64,10 @@ public class SendAlertActivity extends AppCompatActivity  implements View.OnClic
         setContentView(R.layout.activity_send_alert);
         Intent intent = getIntent();
         String areaMsg = intent.getStringExtra(RecyclerActivity.MESSAGE);
+        toolbarSendMessage = findViewById(R.id.toolBarSendMessage);
+        setSupportActionBar(toolbarSendMessage);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        tvSendMessage = findViewById(R.id.tvSendMessage);
         Button sendMsg = findViewById(R.id.btnSendMsg);
         pgBarEmergency = findViewById(R.id.progressBarEmergency);
         pgBarEmergency.setVisibility(View.INVISIBLE);

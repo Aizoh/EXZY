@@ -24,7 +24,7 @@
     <string name="Region">Region</string>
     <string name="editProfile">Edit Profile</string>
     <string name="updateProfile">Update Profile</string>
-    <string name="reportPage">Report An Emergency !</string>
+    <string name="reportPage"> Press The Emergency To Report !</string>
     <string name="cancel">Cancel</string>
     <string name="emergencyTopic">My Emergency Contacts</string>
     <string name="UrlLink">http://</string>
@@ -32,4 +32,5 @@
     <string name="registration">Register Here</string>
     <string name="Username">Name</string>
     <string name="confirmEmail">Confirm Mail</string>
+    <string name="submitText">Report Now</string>
 </resources>

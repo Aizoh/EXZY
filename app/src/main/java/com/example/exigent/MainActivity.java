@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     EditText Etmail,Etpass;
     ProgressBar progressBar;
+    TextInputLayout textInputLayoutPassword;
 
     //sign up
     EditText etReg_name, etPassword, etReg_password,
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button SignIn = findViewById(R.id.btnIn);
         Etmail = findViewById(R.id.eTmail);
         Etpass = findViewById(R.id.eTpass);
+        textInputLayoutPassword = findViewById(R.id.tInLyPassword);
         TextView Tvforgotpass = findViewById(R.id.forgot_pass);
         Tvforgotpass.setVisibility(View.VISIBLE);
         progressBar = findViewById(R.id.progress_circular);
@@ -69,9 +71,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
         if(password.isEmpty()){
+            textInputLayoutPassword.setPasswordVisibilityToggleEnabled(false);
             Etpass.setError("Enter password");
             Etpass.requestFocus();
             return;
+        }
+        if(!password.isEmpty()){
+            textInputLayoutPassword.setPasswordVisibilityToggleEnabled(true);
         }
         if(password.length()<6){
             Etpass.setError("Minimum of six characters");

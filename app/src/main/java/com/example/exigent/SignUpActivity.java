@@ -17,6 +17,7 @@ import com.example.exigent.Model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,6 +29,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText editTextName, editTextEmail, editTextPassword,editTextPhone,editTextRegion;
+    TextInputLayout textInputLayoutPassword;
     Button register;
     private FirebaseAuth mAuth;
     ProgressBar progressBar;
@@ -39,6 +41,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_sing_up);
+        textInputLayoutPassword = findViewById(R.id.tInLyRegPassword);
         editTextName = findViewById(R.id.etName);
         editTextEmail = findViewById(R.id.etEmail);
         editTextPassword = findViewById(R.id.etPass);
@@ -81,6 +84,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             editTextPassword.setError("Enter password");
             editTextPassword.requestFocus();
             return;
+        }
+        if(!password.isEmpty()){
+            textInputLayoutPassword.setPasswordVisibilityToggleEnabled(false);
         }
         if(password.length()<6){
             editTextPassword.setError("Minimum of six characters");

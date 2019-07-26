@@ -14,7 +14,19 @@
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+        android:textStyle="bold"/>
+
+    <androidx.legacy.widget.Space
+        android:id="@+id/spaceOnly"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="@id/tvDate"
+        app:layout_constraintStart_toStartOf="@id/tvDate"
+        app:layout_constraintTop_toBottomOf="@id/tvDate" />
 
     <TextView
         android:id="@+id/tvMessage"
@@ -26,5 +38,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDate" />
+        app:layout_constraintTop_toBottomOf="@+id/spaceOnly"
+        android:textStyle="italic"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Button"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
