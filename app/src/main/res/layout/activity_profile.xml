@@ -185,7 +185,8 @@
                         android:id="@+id/etEmergeCont1Name"
                         android:layout_marginTop="10dp"
                         android:layout_marginStart="10sp"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                        android:layout_centerHorizontal="true"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -194,7 +195,8 @@
                         android:id="@+id/etEmergeCont1Phone"
                         android:layout_marginTop="10dp"
                         android:layout_marginStart="10sp"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                        android:layout_centerHorizontal="true"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -203,7 +205,8 @@
                         android:id="@+id/etEmergeCont1relationship"
                         android:layout_marginTop="10dp"
                         android:layout_marginStart="10sp"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                        android:layout_centerHorizontal="true"/>
 
 
                 </RelativeLayout>
@@ -228,7 +231,8 @@
                         android:id="@+id/etEmergeCont2Name"
                         android:layout_marginTop="10dp"
                         android:layout_marginStart="10sp"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                        android:layout_centerHorizontal="true"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -237,7 +241,8 @@
                         android:id="@+id/etEmergeCont2Phone"
                         android:layout_marginTop="10dp"
                         android:layout_marginStart="10sp"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                        android:layout_centerHorizontal="true"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -246,7 +251,8 @@
                         android:id="@+id/etEmergeCont2Relationship"
                         android:layout_marginTop="10dp"
                         android:layout_marginStart="10sp"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                        android:layout_centerHorizontal="true"/>
 
                 </RelativeLayout>
 

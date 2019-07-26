@@ -35,6 +35,7 @@ public class GuideActivity extends AppCompatActivity implements EmergencyGuideAd
     private List<EmergencyGuide> emergencyGuideList;
     private EmergencyGuideAdapter guideAdapter;
     private SearchView searchView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,12 +118,17 @@ public class GuideActivity extends AppCompatActivity implements EmergencyGuideAd
 
     /**TODO add a view for the emergency guide **/
     public void emergencyguidePopulate(){
+        String stringTerrorism = getString(R.string.guideTerrorism);
+        String stringFire = getString(R.string.guideFire);
+        String stringFlood = getString(R.string.guideFloods);
+        String stringKidnapping = getString(R.string.guideKidnapping);
+        String stringRobbery = getString(R.string.guideRobbery);
         int[] images = {R.drawable.pic1,R.drawable.pic2,R.drawable.pic3,R.drawable.pic4,R.drawable.pic5};
-        emergencyGuideList.add(new EmergencyGuide(images[0],"Fire","1. hide behind the wall\n wake up later"));
-        emergencyGuideList.add(new EmergencyGuide(images[1],"Floods","1. hide behind the wall\n wake up later"));
-        emergencyGuideList.add(new EmergencyGuide(images[2],"Robbery","1. hide behind the wall\n wake up later"));
-        emergencyGuideList.add(new EmergencyGuide(images[3],"Terrorism","1. hide behind the wall\n wake up later"));
-        emergencyGuideList.add(new EmergencyGuide(images[4],"Kidnapping","1. pretend to cooperate\n wait for help"));
+        emergencyGuideList.add(new EmergencyGuide(images[0],"Fire",stringFire));
+        emergencyGuideList.add(new EmergencyGuide(images[1],"Floods",stringFlood));
+        emergencyGuideList.add(new EmergencyGuide(images[2],"Robbery",stringRobbery));
+        emergencyGuideList.add(new EmergencyGuide(images[3],"Terrorism",stringTerrorism));
+        emergencyGuideList.add(new EmergencyGuide(images[4],"Kidnapping",stringKidnapping));
     }
     private void whiteNotificationBar(View view) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

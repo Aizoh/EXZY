@@ -67,6 +67,12 @@ public class GPSService extends Service implements LocationListener {
             if (isGPSEnabled) {
                 mLocationManager.requestLocationUpdates(
                         LocationManager.GPS_PROVIDER, TIME, DISTANCE, this);
+                if(mLocation == null){
+
+                    mLocationManager.requestLocationUpdates(
+                            LocationManager.GPS_PROVIDER, TIME, DISTANCE, this);
+
+                }
                 if (mLocationManager != null) {
                     mLocation = mLocationManager
                             .getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -229,5 +235,6 @@ public class GPSService extends Service implements LocationListener {
 
         }
     }
+
 
 }

@@ -33,4 +33,60 @@
     <string name="Username">Name</string>
     <string name="confirmEmail">Confirm Mail</string>
     <string name="submitText">Report Now</string>
+    <!-- guides hints-->
+    <string name="guideFire">
+        1. Crawl low under any smoke to your exit - heavy smoke and poisonous gases collect first along the ceiling.\n
+        2. Before opening a door, feel the doorknob and door. If either is hot, or if there is smoke coming around the door,
+        leave the door closed and use your second way out.\n
+        3. If you open a door, open it slowly. Be ready to shut it quickly if heavy smoke or fire is present.\n
+        4. If you can’t get to someone needing assistance, leave the home and call 9-1-1 or the fire department.
+        Tell the emergency operator where the person is located.\n
+        5. If pets are trapped inside your home, tell firefighters right away.\n
+        6. If you can’t get out, close the door and cover vents and cracks around doors with cloth or tape to keep smoke out.
+        Call 9-1-1 or your fire department. Say where you are and signal for help at the window with a light-colored cloth or a flashlight.\n
+        7. If your clothes catch fire, stop, drop, and roll – stop immediately, drop to the ground, and cover your face with your hands.
+        Roll over and over or back and forth until the fire is out.  If you or someone else cannot stop, drop, and roll, smother the flames with a blanket or towel.
+        Use cool water to treat the burn immediately for 3 to 5 minutes.  Cover with a clean, dry cloth.  Get medical help right away by calling 9-1-1 or the fire department.
+    </string>
+    <string name="guideFloods">
+        1. Do not walk, swim, or drive through flood waters. Turn Around. Don’t Drown walk\n
+        2. Stay off bridges over fast-moving water. Fast-moving water can wash bridges away without warning.\n
+        3. If your vehicle is trapped in rapidly moving water, then stay inside. If water is rising inside the vehicle, then seek refuge on the roof.\n
+        4. If trapped in a building, then go to its highest level. Do not climb into a closed attic.
+        You may become trapped by rising floodwater. Go on the roof only if necessary. Once there, signal for help.\n
+    </string>
+    <string name="guideRobbery">
+
+        1. Look for a way out The first thing you do whenever you walk in is you start looking for a way out.
+        That way if a bad guy comes in the front door, you can be going out the back.\n
+        2. Do not try to fight. If there is a robbery, don’t try to be a hero. Try to escape undetected if you can.
+        Just remember. They are probably just there to get money.\n
+        3. Look for hiding places like a bathroom or even a freezer. Once you are in a safe hiding place.\n
+        4. If the gunman has you cornered, comply and hand over anything he wants.\n
+        5. If all else fails.If you think you have no other choice and you are about to be killed, distract the gunman Make a diversion and escape.\n
+        6. Another good tip: Memorize as many details as possible about the suspect what they are wearing, how tall he is, what kind of car he’s driving.\n
+        They could help police catch him before he strikes again.\n
+
+    </string>
+    <string name="guideTerrorism">
+
+        1. Run to a place of safety.\n
+        2. It’s better to hide than to confront. Remember to turn your phone to silent and turn off vibrate.
+        Barricade yourself in if you can\n
+        3. Notify the Police ,The police service is working tirelessly to confront the terrorist threat we all face.\n
+
+
+    </string>
+    <string name="guideKidnapping">
+
+        1. Draw Attention If you are being kidnapped in a public place or in a hotel room, try to make as much commotion as possible.\n
+        2. Remain Calm, Listen do not physically resist. Follow your captors instructions. Resisting may lead to you being physically harmed.
+        You should not struggle in a confined space.Try to visualize the route and take note of street noises and turns.\n
+        3. Get to Know Your Captors.Try to establish ground rules for your survival and attempt to establish some type of rapport with the captors.
+        Those being held against their will sometimes sympathize with their captors.Make them aware of your needs and ask for items to increase your comfort. Remember that you are valuable to them.\n
+        4. Stimulation and Hygiene.You should eat and drink what is given to you and maintain your hygiene as best you can. If you are with other hostages, find a way to communicate.
+        In order to maintain clear judgment and reason.\n
+
+        5. Getting Out Unscathed after escape is not an option, as it can lead to retaliation. After successful ransom negotiations conclude, kidnap victims are usually released unharmed.\n
+    </string>
 </resources>
