@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -68,7 +69,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         btnEditProfile.setOnClickListener(this);
 
         getDetailsFromFirebase();
-        //setDisplay();
 
 
     }
@@ -85,6 +85,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     public void getDetailsFromFirebase(){
         // assign values to the strings from firebase.
+
         mAuth = FirebaseAuth.getInstance();
         currentUserId = mAuth.getCurrentUser().getUid();
         FirebaseUser user = mAuth.getInstance().getCurrentUser();
@@ -124,6 +125,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                     tvEname2.setText(sename2);
                     tvEphone2.setText(sephone2);
                     tvErelationship2.setText(serelate2);
+
+
                 }
 
 
@@ -137,62 +140,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
 
-        /*//FirebaseUser user = mAuth.getCurrentUser();
-        currentUserId = mAuth.getCurrentUser().getUid();
-        profileUserRef = FirebaseDatabase.getInstance().getReference("Users/UsersProfile").child(currentUserId);
 
-        profileUserRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()){
-                    String sname = dataSnapshot.child("name").getValue().toString();
-                    String sphone =dataSnapshot.child("phone").getValue().toString();
-                    String sregion= dataSnapshot.child("region").getValue().toString();
-                    String semail= dataSnapshot.child("email").getValue().toString();
-                    String sename1 = dataSnapshot.child("eName1").getValue().toString();
-                    String sephone1 = dataSnapshot.child("ePhone1").getValue().toString();
-                    String serelate1= dataSnapshot.child("eRelationship1").getValue().toString();
-                    String sename2 = dataSnapshot.child("eName2").getValue().toString();
-                    String sephone2 = dataSnapshot.child("ePhone2").getValue().toString();
-                    String serelate2 = dataSnapshot.child("erelationship2").getValue().toString();
 
-                    tvName.setText(sname);
-                    tvEmail.setText(semail);
-                    tvPhone.setText(sphone);
-                    tvRegion.setText(sregion);
-
-                    tvEname1.setText(sename1);
-                    tvEphone1.setText(sephone1);
-                    tvErelationship1.setText(serelate1);
-                    tvEname2.setText(sename2);
-                    tvEphone2.setText(sephone2);
-                    tvErelationship2.setText(serelate2);
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });*/
-
-    }
-    // set fields display with the fetched firebase data
-    public void setDisplay(){
-        //setting values
-        imageViewProfile.setImageURI(Uri.EMPTY);
-        tvName.setText(pname);
-        tvEmail.setText(pemail);
-        tvPhone.setText(pphone);
-        tvRegion.setText(pregion);
-
-        tvEname1.setText(pename1);
-        tvEphone1.setText(pephone1);
-        tvErelationship1.setText(perelate1);
-        tvEname2.setText(pename1);
-        tvEphone2.setText(pephone2);
-        tvErelationship2.setText(perelate2);
     }
 
     @Override

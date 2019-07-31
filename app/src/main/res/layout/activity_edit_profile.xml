@@ -330,32 +330,6 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
 
-                    <!-- <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/name"
-                        android:layout_below="@+id/emergeCont2Relationship"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etemergeCont2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/reset_pass"/>
-
-                    </com.google.android.material.textfield.TextInputLayout>
-                    &&&&&&&########
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:hint=""
-                        >
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width=""
-                            android:layout_height="" />
-
-                    </com.google.android.material.textfield.TextInputLayout>-->
 
                 </RelativeLayout>
 
@@ -363,26 +337,6 @@
 
 
         </RelativeLayout>
-
-        <!--<Button
-            android:id="@+id/btnUpdateprofile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="67dp"
-            android:layout_marginBottom="6dp"
-            android:text="@string/updateProfile" />
-
-        <Button
-            android:id="@+id/btnCancelEdit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="43dp"
-            android:layout_marginBottom="4dp"
-            tools:text="@string/cancel" />-->
 
     </RelativeLayout>
 

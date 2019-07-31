@@ -280,19 +280,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         profileUpdateRef = FirebaseDatabase.getInstance().getReference().child("Users/UsersProfile").child(uid1);
 
-            //User usersave1 =  new User();
 
-            //String  uid1  = user.getUid();
-            /*usersave1.setId(uid1);
-            usersave1.setName(name);
-            usersave1.setPhone(phone);
-            usersave1.setRegion(region);
-            usersave1.seteName1(ename1);
-            usersave1.setePhone1(ephone1);
-            usersave1.seteRelationship1(erelate1);
-            usersave1.seteName2(ename2);
-            usersave1.setePhone2(ephone2);
-            usersave1.setErelationship2(erelate2);*/
         HashMap usersave2 = new HashMap();
             usersave2.put("name",name);
             usersave2.put("phone",phone);

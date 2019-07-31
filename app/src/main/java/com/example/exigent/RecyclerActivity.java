@@ -187,7 +187,7 @@ public class RecyclerActivity extends AppCompatActivity  implements View.OnClick
             String link = " http://maps.google.com/?";
 
             String emergency = event.getCaption()+" was Reported at "+ area +link
-                    + loc.getLatitude()+","+loc.getLongitude() +"at "+ currentTime ;
+                    + loc.getLatitude()+","+loc.getLongitude() +" at "+ currentTime ;
 
 
             /*String text = "maps.google.com/?"+ loc.getLongitude()+","+loc.getLatitude();

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.exigent.Model.User;
+import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -160,35 +161,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                 }
                             });
                            // TODO  :25/07/2019 add a firestore database
-                           /*userRef.set(usersave).addOnSuccessListener(new OnSuccessListener<Void>() {
-                               @Override
-                               public void onSuccess(Void aVoid) {
-                                   Toast.makeText(getApplicationContext(),"Successful user added",
-                                           Toast.LENGTH_LONG).show();
-                               }
-                           }).addOnFailureListener(new OnFailureListener() {
-                               @Override
-                               public void onFailure(@NonNull Exception e) {
 
-                               }
-                           });*/
-
-                     /*db.collection("Users").add(usersave).addOnSuccessListener(new
-                              OnSuccessListener<DocumentReference>() {
-                             @Override
-                             public void onSuccess(DocumentReference documentReference) {
-                                 Toast.makeText(getApplicationContext(),"Successful user added",
-                                         Toast.LENGTH_LONG).show();
-
-                             }
-                         }).addOnFailureListener(new OnFailureListener() {
-                             @Override
-                             public void onFailure(@NonNull Exception e) {
-                                 Toast.makeText(getApplicationContext()," user added failure",
-                                         Toast.LENGTH_LONG).show();
-
-                             }
-                         });*/
                           user.sendEmailVerification()
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -203,7 +176,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                         editTextPassword.setText("");
                                         editTextPhone.setText("");
                                         editTextRegion.setText("");
-
 
                                         // updateUI(user);
 
@@ -253,4 +225,21 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         super.onBackPressed();
         startActivity(new Intent(SignUpActivity.this,MainActivity.class));
     }
+
+    /*public  void signOut(){
+        AuthUI.getInstance()
+                .signOut(this)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    public void onComplete(@NonNull Task<Void> task) {
+                        // ...
+                        if(task.isSuccessful()){
+                           // Toast.makeText(getApplicationContext(),"Signed out",Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(getApplicationContext() ,MainActivity.class));
+                        }else{
+                            Toast.makeText(getApplicationContext(),"Encountered an Error !!",Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+
+    }*/
 }

@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:layout_editor_absoluteY="81dp">
+    tools:layout_editor_absoluteY="81dp"
+    android:background="@drawable/forgot5"
+    tools:context=".ForgotPassActivity"
+    >
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolBarResetPass"
         style="@style/MyToolbar"
@@ -37,8 +40,27 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/Email"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-    <EditText
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/f_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType=""/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!--<EditText
         android:id="@+id/f_email"
         android:layout_width="match_parent"
         android:layout_height="56dp"
@@ -50,12 +72,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+        app:layout_constraintTop_toBottomOf="@+id/progressBar" />-->
 
     <Button
         android:id="@+id/btnforgot_pass"
-        android:layout_width="374dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
 
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"

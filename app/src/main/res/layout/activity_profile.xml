@@ -37,7 +37,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:id="@+id/relativelayout1.2">
+            android:id="@+id/relativelayout1.2"
+            >
 
 
             <!--<TextView
@@ -56,13 +57,14 @@
                 android:id="@+id/cardviewProfile"
                 android:layout_margin="5dp"
                 android:padding="10dp"
-                android:background="@drawable/grad"
+
                 app:cardCornerRadius="10dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp">
+                    android:padding="10dp"
+                    android:background="@drawable/grad">
 
                     <RelativeLayout
                         android:id="@+id/relativeLayoutImage"
@@ -80,14 +82,14 @@
                             android:layout_height="120dp"
                             android:layout_alignParentTop="true"
                             android:layout_marginStart="9dp"
-
                             android:layout_marginTop="9dp"
                             android:layout_marginEnd="9dp"
                             android:layout_marginBottom="9dp"
                             android:adjustViewBounds="true"
                             android:background="@drawable/circle"
+                            android:scaleType="centerInside"
                             android:padding="4dp"
-                            android:src="@drawable/hat" />
+                            android:src="@drawable/catcom" />
 
                     </RelativeLayout>
 
@@ -98,7 +100,7 @@
                         android:layout_below="@id/relativeLayoutImage"
                         android:layout_centerHorizontal="true"
                         android:layout_marginStart="5dp"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                         android:textColor="#000000" />
 
                     <TextView
@@ -109,7 +111,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="5dp"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
                     <TextView
                         android:id="@+id/etPhone"
@@ -177,6 +179,7 @@
                     android:padding="10dp"
                     android:id="@+id/relativeLY1"
                     android:layout_below="@+id/relativeLY1"
+                    android:background="@drawable/grad"
                     >
 
                     <TextView
@@ -223,6 +226,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
+                    android:background="@drawable/grad"
                     android:id="@+id/relativeLY2">
 
                     <TextView

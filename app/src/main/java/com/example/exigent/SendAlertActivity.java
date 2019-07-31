@@ -163,9 +163,6 @@ public class SendAlertActivity extends AppCompatActivity  implements View.OnClic
         message1.setDate(dateTime);
         message1.setMessage(message);
 
-/*        HashMap emergency = new HashMap();
-        emergency.put("Date",currentTime);
-        emergency.put("Message",message);*/
         currentEmergencyRecordRef.push().setValue(message1).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

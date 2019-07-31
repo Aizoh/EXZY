@@ -18,20 +18,22 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Objects;
+
 public class ForgotPassActivity extends AppCompatActivity implements View.OnClickListener {
     TextView tvResetPass;
-    Toolbar toolbarResetpassword;
     EditText Etforgot_email;
     Button BtnForgotpass;
     ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.forgot_pass);
+        setContentView(R.layout.activity_forgot_pass);
         tvResetPass = findViewById(R.id.tvResetPass);
-        toolbarResetpassword = findViewById(R.id.toolBarResetPass);
+        Toolbar  toolbarResetpassword = findViewById(R.id.toolBarResetPass);
         setSupportActionBar(toolbarResetpassword);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         Etforgot_email = findViewById(R.id.f_email);
         BtnForgotpass = findViewById(R.id.btnforgot_pass);
         progressBar = findViewById(R.id.progressBar);
